@@ -1,0 +1,402 @@
+{
+  "title": "drowsy 295 race",
+  "description": "road to level 295.",
+  "updatedOn": "2026-07-28",
+  "characters": [
+    {
+      "name": "karinay",
+      "region": "NA",
+      "color": "#8c6f9c",
+      "snapshots": [
+        {
+          "date": "2026-07-21",
+          "level": 293,
+          "expCurrent": "334137656176011",
+          "expToNext": "391720581683483",
+          "progress": 85.3,
+          "world": "Kronos",
+          "job": "Adele"
+        },
+        {
+          "date": "2026-07-22",
+          "level": 293,
+          "expCurrent": "338054861992846",
+          "expToNext": "391720581683483",
+          "progress": 86.3,
+          "world": "Kronos",
+          "job": "Adele"
+        },
+        {
+          "date": "2026-07-23",
+          "level": 293,
+          "expCurrent": "341188626646314",
+          "expToNext": "391720581683483",
+          "progress": 87.1,
+          "world": "Kronos",
+          "job": "Adele"
+        },
+        {
+          "date": "2026-07-24",
+          "level": 293,
+          "expCurrent": "348631317698300",
+          "expToNext": "391720581683483",
+          "progress": 89,
+          "world": "Kronos",
+          "job": "Adele"
+        },
+        {
+          "date": "2026-07-25",
+          "level": 293,
+          "expCurrent": "348631317698300",
+          "expToNext": "391720581683483",
+          "progress": 89,
+          "world": "Kronos",
+          "job": "Adele"
+        },
+        {
+          "date": "2026-07-26",
+          "level": 293,
+          "expCurrent": "354115405841869",
+          "expToNext": "391720581683483",
+          "progress": 90.4,
+          "world": "Kronos",
+          "job": "Adele"
+        },
+        {
+          "date": "2026-07-27",
+          "level": 294,
+          "expCurrent": "53430000000000",
+          "expToNext": "430892639851831",
+          "progress": 12.4,
+          "world": "Kronos",
+          "job": "Adele"
+        },
+        {
+          "date": "2026-07-28",
+          "level": 294,
+          "expCurrent": "71077590836117",
+          "expToNext": "430892639851831",
+          "progress": 16.495,
+          "world": "Kronos",
+          "job": "Adele"
+        }
+      ]
+    },
+    {
+      "name": "tamitamitami",
+      "region": "NA",
+      "color": "#49795c",
+      "snapshots": [
+        {
+          "date": "2026-07-21",
+          "level": 294,
+          "expCurrent": "59894076939405",
+          "expToNext": "430892639851831",
+          "progress": 13.9,
+          "world": "Kronos",
+          "job": "Wind Archer"
+        },
+        {
+          "date": "2026-07-22",
+          "level": 294,
+          "expCurrent": "64633895977775",
+          "expToNext": "430892639851831",
+          "progress": 15,
+          "world": "Kronos",
+          "job": "Wind Archer"
+        },
+        {
+          "date": "2026-07-23",
+          "level": 294,
+          "expCurrent": "75406211974070",
+          "expToNext": "430892639851831",
+          "progress": 17.5,
+          "world": "Kronos",
+          "job": "Wind Archer"
+        },
+        {
+          "date": "2026-07-24",
+          "level": 294,
+          "expCurrent": "79284245732737",
+          "expToNext": "430892639851831",
+          "progress": 18.4,
+          "world": "Kronos",
+          "job": "Wind Archer"
+        },
+        {
+          "date": "2026-07-25",
+          "level": 294,
+          "expCurrent": "95658166047106",
+          "expToNext": "430892639851831",
+          "progress": 22.2,
+          "world": "Kronos",
+          "job": "Wind Archer"
+        },
+        {
+          "date": "2026-07-26",
+          "level": 294,
+          "expCurrent": "118926368599105",
+          "expToNext": "430892639851831",
+          "progress": 27.6,
+          "world": "Kronos",
+          "job": "Wind Archer"
+        },
+        {
+          "date": "2026-07-27",
+          "level": 294,
+          "expCurrent": "177760000000000",
+          "expToNext": "430892639851831",
+          "progress": 41.253,
+          "world": "Kronos",
+          "job": "Wind Archer"
+        },
+        {
+          "date": "2026-07-28",
+          "level": 294,
+          "expCurrent": "188497300711765",
+          "expToNext": "430892639851831",
+          "progress": 43.745,
+          "world": "Kronos",
+          "job": "Wind Archer"
+        }
+      ]
+    },
+    {
+      "name": "nelo",
+      "region": "NA",
+      "color": "#b16668",
+      "snapshots": [
+        {
+          "date": "2026-07-21",
+          "level": 293,
+          "expCurrent": "341580347227997",
+          "expToNext": "391720581683483",
+          "progress": 87.2,
+          "world": "Kronos",
+          "job": "Fire/Poison Mage"
+        },
+        {
+          "date": "2026-07-22",
+          "level": 293,
+          "expCurrent": "352548523515135",
+          "expToNext": "391720581683483",
+          "progress": 90,
+          "world": "Kronos",
+          "job": "Fire/Poison Mage"
+        },
+        {
+          "date": "2026-07-23",
+          "level": 294,
+          "expCurrent": "9910530716592",
+          "expToNext": "430892639851831",
+          "progress": 2.3,
+          "world": "Kronos",
+          "job": "Fire/Poison Mage"
+        },
+        {
+          "date": "2026-07-24",
+          "level": 294,
+          "expCurrent": "15081242394814",
+          "expToNext": "430892639851831",
+          "progress": 3.5,
+          "world": "Kronos",
+          "job": "Fire/Poison Mage"
+        },
+        {
+          "date": "2026-07-25",
+          "level": 294,
+          "expCurrent": "54723365261183",
+          "expToNext": "430892639851831",
+          "progress": 12.7,
+          "world": "Kronos",
+          "job": "Fire/Poison Mage"
+        },
+        {
+          "date": "2026-07-26",
+          "level": 294,
+          "expCurrent": "70235500295848",
+          "expToNext": "430892639851831",
+          "progress": 16.3,
+          "world": "Kronos",
+          "job": "Fire/Poison Mage"
+        },
+        {
+          "date": "2026-07-27",
+          "level": 294,
+          "expCurrent": "79580000000000",
+          "expToNext": "430892639851831",
+          "progress": 18.468,
+          "world": "Kronos",
+          "job": "Fire/Poison Mage"
+        },
+        {
+          "date": "2026-07-28",
+          "level": 294,
+          "expCurrent": "85713072018318",
+          "expToNext": "430892639851831",
+          "progress": 19.891,
+          "world": "Kronos",
+          "job": "Arch Mage (F/P)"
+        }
+      ]
+    },
+    {
+      "name": "edison",
+      "region": "NA",
+      "color": "#6a88a0",
+      "snapshots": [
+        {
+          "date": "2026-07-21",
+          "level": 294,
+          "expCurrent": "112893871641180",
+          "expToNext": "430892639851831",
+          "progress": 26.2,
+          "world": "Kronos",
+          "job": "Buccaneer"
+        },
+        {
+          "date": "2026-07-22",
+          "level": 294,
+          "expCurrent": "146934390189474",
+          "expToNext": "430892639851831",
+          "progress": 34.1,
+          "world": "Kronos",
+          "job": "Buccaneer"
+        },
+        {
+          "date": "2026-07-23",
+          "level": 294,
+          "expCurrent": "193901687933324",
+          "expToNext": "430892639851831",
+          "progress": 45,
+          "world": "Kronos",
+          "job": "Buccaneer"
+        },
+        {
+          "date": "2026-07-24",
+          "level": 294,
+          "expCurrent": "205104896569472",
+          "expToNext": "430892639851831",
+          "progress": 47.6,
+          "world": "Kronos",
+          "job": "Buccaneer"
+        },
+        {
+          "date": "2026-07-25",
+          "level": 294,
+          "expCurrent": "215446319925916",
+          "expToNext": "430892639851831",
+          "progress": 50,
+          "world": "Kronos",
+          "job": "Buccaneer"
+        },
+        {
+          "date": "2026-07-26",
+          "level": 294,
+          "expCurrent": "227511313841767",
+          "expToNext": "430892639851831",
+          "progress": 52.8,
+          "world": "Kronos",
+          "job": "Buccaneer"
+        },
+        {
+          "date": "2026-07-27",
+          "level": 294,
+          "expCurrent": "241190000000000",
+          "expToNext": "430892639851831",
+          "progress": 55.973,
+          "world": "Kronos",
+          "job": "Buccaneer"
+        },
+        {
+          "date": "2026-07-28",
+          "level": 294,
+          "expCurrent": "252657588562989",
+          "expToNext": "430892639851831",
+          "progress": 58.635,
+          "world": "Kronos",
+          "job": "Buccaneer"
+        }
+      ]
+    },
+    {
+      "name": "Pãck",
+      "region": "NA",
+      "color": "#a58a5f",
+      "snapshots": [
+        {
+          "date": "2026-07-21",
+          "level": 293,
+          "expCurrent": "256159747442477",
+          "expToNext": "391720581683483",
+          "progress": 65.393,
+          "world": "Kronos",
+          "job": "Aran"
+        },
+        {
+          "date": "2026-07-22",
+          "level": 293,
+          "expCurrent": "262439747442477",
+          "expToNext": "391720581683483",
+          "progress": 66.996,
+          "world": "Kronos",
+          "job": "Aran"
+        },
+        {
+          "date": "2026-07-23",
+          "level": 293,
+          "expCurrent": "281229747442477",
+          "expToNext": "391720581683483",
+          "progress": 71.793,
+          "world": "Kronos",
+          "job": "Aran"
+        },
+        {
+          "date": "2026-07-24",
+          "level": 293,
+          "expCurrent": "290369747442477",
+          "expToNext": "391720581683483",
+          "progress": 74.126,
+          "world": "Kronos",
+          "job": "Aran"
+        },
+        {
+          "date": "2026-07-25",
+          "level": 293,
+          "expCurrent": "375979747442477",
+          "expToNext": "391720581683483",
+          "progress": 95.981,
+          "world": "Kronos",
+          "job": "Aran"
+        },
+        {
+          "date": "2026-07-26",
+          "level": 294,
+          "expCurrent": "8739165758994",
+          "expToNext": "430892639851831",
+          "progress": 2.028,
+          "world": "Kronos",
+          "job": "Aran"
+        },
+        {
+          "date": "2026-07-27",
+          "level": 294,
+          "expCurrent": "17659165758994",
+          "expToNext": "430892639851831",
+          "progress": 4.098,
+          "world": "Kronos",
+          "job": "Aran"
+        },
+        {
+          "date": "2026-07-28",
+          "level": 294,
+          "expCurrent": "21759165758994",
+          "expToNext": "430892639851831",
+          "progress": 5.049,
+          "world": "Kronos",
+          "job": "Aran"
+        }
+      ]
+    }
+  ]
+}

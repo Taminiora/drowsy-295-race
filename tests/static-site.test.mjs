@@ -1,0 +1,98 @@
+import assert from "node:assert/strict";
+import { access, readFile } from "node:fs/promises";
+import test from "node:test";
+
+const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
+
+test("the built site is a static Drowsy leaderboard", async () => {
+  const [app, html, data] = await Promise.all([
+    read("src/App.tsx"),
+    read("dist/index.html"),
+    read("src/data/history.json"),
+  ]);
+
+  assert.match(app, /7-day progress/);
+  assert.match(app, /<span>%<\/span>/);
+  assert.match(app, /lv\./);
+  const [chart, styles] = await Promise.all([
+    read("src/ProgressChart.tsx"),
+    read("src/styles.css"),
+  ]);
+  assert.match(chart, /aria-pressed/);
+  assert.match(chart, /project 295/);
+  assert.match(chart, /projected winner/);
+  assert.match(chart, /dailyExpPace/);
+  assert.doesNotMatch(chart, /exp-delta pace/);
+  assert.doesNotMatch(chart, /trendline controls/);
+  assert.doesNotMatch(chart, /chart-trend-line/);
+  assert.match(chart, /clipPath="url\(#plot-clip\)"/);
+  assert.match(chart, /x1=\{x\(0\)\}/);
+  assert.match(chart, /y1=\{y\(latestValue - dailyPace \* currentDay\)\}/);
+  assert.match(chart, /className="chart-projection-hit"/);
+  assert.match(chart, /<title>\{projectionLabel\}<\/title>/);
+  assert.match(chart, /projectedDate/);
+  assert.match(chart, /onClick/);
+  assert.match(chart, /onPointerMove=\{handleChartPointerMove\}/);
+  assert.match(chart, /createSVGPoint/);
+  assert.match(chart, /className="chart-tooltip"/);
+  assert.match(chart, /className="chart-point-hit"/);
+  assert.match(chart, /history:\$\{member\.name\}:\$\{snapshot\.date\}/);
+  assert.match(chart, /· 100% ·/);
+  assert.match(chart, /activePoint === projectionKey \? "4" : "2\.5"/);
+  assert.match(chart, /activePoint === pointKey \? "4" : "2\.5"/);
+  assert.match(styles, /height: 100dvh/);
+  assert.match(styles, /\.progress-chart \{\s+flex: 1;\s+min-height: 0;/);
+  assert.match(styles, /\.rank-list \{\s+align-self: center;/);
+  assert.match(html, /<div id="root"><\/div>/);
+  const parsed = JSON.parse(data);
+  assert.equal(parsed.title, "drowsy 295 race");
+  assert.deepEqual(
+    parsed.characters.map((character) => character.name),
+    ["karinay", "tamitamitami", "nelo", "edison", "Pãck"],
+  );
+
+  const pack = parsed.characters.find(
+    (character) => character.name === "Pãck",
+  );
+  assert.equal(pack.snapshots.length, 8);
+  assert.equal(pack.snapshots[4].progress, 95.981);
+  assert.equal(pack.snapshots[4].level, 293);
+  assert.equal(pack.snapshots[5].level, 294);
+  assert.equal(pack.snapshots.at(-1).progress, 5.049);
+});
+
+test("the project has no server or database runtime", async () => {
+  const packageJson = JSON.parse(await read("package.json"));
+  const packages = {
+    ...packageJson.dependencies,
+    ...packageJson.devDependencies,
+  };
+
+  for (const removed of ["next", "vinext", "drizzle-orm", "wrangler"]) {
+    assert.equal(packages[removed], undefined);
+  }
+
+  await assert.rejects(
+    access(new URL("../.openai/hosting.json", import.meta.url)),
+  );
+});
+
+test("the updater is slow and the Pages workflow is configured", async () => {
+  const [updater, roster, workflow] = await Promise.all([
+    read("scripts/update-rankings.mjs"),
+    read("scripts/roster.mjs"),
+    read(".github/workflows/pages.yml"),
+  ]);
+
+  assert.match(updater, /MIN_REQUEST_INTERVAL_MS = 3_000/);
+  assert.match(updater, /nexon\.com\/api\/maplestory\/no-auth\/ranking/);
+  assert.match(
+    updater,
+    /nexon\.com\/maplestory\/rankings\/overall-ranking\/legendary/,
+  );
+  assert.match(roster, /tamitamitami/);
+  assert.match(workflow, /cron: "0 19 \* \* \*"/);
+  assert.match(workflow, /cron: "0 20 \* \* \*"/);
+  assert.match(workflow, /TZ=America\/Los_Angeles date \+%H/);
+  assert.match(workflow, /actions\/deploy-pages@v4/);
+});

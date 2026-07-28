@@ -1,0 +1,414 @@
+:root {
+  color-scheme: dark;
+  --background: #050a0b;
+  --panel: #091011;
+  --panel-alt: #0d1516;
+  --text: #d7d7cc;
+  --muted: #8c9999;
+  --heading: #e5d69b;
+  --green: #22c846;
+  --red: #e06b61;
+  --line: #253033;
+  --font-mono: "Maple Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  min-height: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  height: 100vh;
+  height: 100dvh;
+  line-height: 1.5;
+  margin: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+main {
+  display: flex;
+  height: 100vh;
+  height: 100dvh;
+  margin-inline: auto;
+  min-height: 0;
+  padding: 16px 0;
+  width: calc(100% - 32px);
+}
+
+.board-shell {
+  background: transparent;
+  flex: 1;
+  height: 100%;
+  min-height: 0;
+  text-transform: lowercase;
+}
+
+.leaderboard-grid {
+  display: grid;
+  grid-template-columns: minmax(360px, 0.7fr) minmax(0, 1.3fr);
+  height: 100%;
+  min-height: 0;
+}
+
+.rank-list {
+  align-self: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+.rank-header,
+.rank-row {
+  align-items: center;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 38px minmax(110px, 1fr) 52px 112px;
+  padding: 0 12px;
+}
+
+.rank-header {
+  color: var(--heading);
+  flex: 0 0 32px;
+  font-size: 11px;
+}
+
+.rank-row {
+  border-top: 1px solid var(--line);
+  flex: 0 0 64px;
+  min-height: 64px;
+}
+
+.rank-row:nth-child(odd) {
+  background: rgb(255 255 255 / 1.2%);
+}
+
+.rank-number {
+  color: var(--text);
+}
+
+.character {
+  align-items: center;
+  display: flex;
+  min-width: 0;
+}
+
+.character strong,
+.character small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.character strong {
+  color: var(--text);
+  font-size: 13px;
+}
+
+.character small {
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+.movement {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.movement.up {
+  color: var(--green);
+}
+
+.movement.down {
+  color: var(--red);
+}
+
+.gain-cell {
+  text-align: right;
+}
+
+.gain-cell strong {
+  color: var(--text);
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.gain-cell small {
+  color: var(--muted);
+  display: block;
+  font-size: 9px;
+  margin-top: 2px;
+}
+
+.progress-track {
+  background: #1c2527;
+  height: 3px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.progress-track span {
+  background: var(--member-color, var(--green));
+  display: block;
+  height: 100%;
+}
+
+.chart-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  padding: 0 0 12px 24px;
+}
+
+.chart-heading {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  min-height: 32px;
+}
+
+.chart-heading h2 {
+  color: var(--heading);
+  font-size: 14px;
+  margin: 0;
+}
+
+.chart-heading span {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.projection-row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.projection-toggle {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 9px;
+  line-height: 1;
+  padding: 5px 7px;
+}
+
+.projection-toggle:hover,
+.projection-toggle:focus-visible,
+.projection-toggle.active {
+  border-color: var(--heading);
+  color: var(--heading);
+  outline: none;
+}
+
+.projection-result {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.projection-result strong {
+  font-weight: 600;
+}
+
+.progress-chart {
+  flex: 1;
+  min-height: 0;
+}
+
+.progress-chart svg {
+  height: 100%;
+  overflow: visible;
+  width: 100%;
+}
+
+.chart-grid {
+  stroke: #253033;
+  stroke-dasharray: 2 4;
+}
+
+.chart-line {
+  fill: none;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 2;
+}
+
+.chart-projection-line {
+  opacity: 0.72;
+  stroke-dasharray: 4 5;
+  stroke-width: 1.5;
+}
+
+.chart-projection-point {
+  pointer-events: none;
+  stroke: var(--background);
+  stroke-width: 1.5;
+  transition: r 120ms ease;
+}
+
+.chart-projection-hit {
+  cursor: help;
+  fill: rgb(0 0 0 / 0.001);
+  outline: none;
+  pointer-events: all;
+}
+
+.chart-point-hit {
+  cursor: help;
+  fill: rgb(0 0 0 / 0.001);
+  outline: none;
+  pointer-events: all;
+}
+
+.chart-projection-hit:focus-visible,
+.chart-point-hit:focus-visible {
+  stroke: var(--text);
+  stroke-width: 1;
+}
+
+.chart-tooltip {
+  pointer-events: none;
+}
+
+.chart-tooltip rect {
+  fill: var(--panel-alt);
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.chart-tooltip text {
+  fill: var(--text);
+  font-family: var(--font-mono);
+  font-size: 8px;
+}
+
+.chart-today-line {
+  opacity: 0.6;
+  stroke: var(--muted);
+  stroke-dasharray: 2 4;
+  stroke-width: 1;
+}
+
+.chart-point {
+  pointer-events: none;
+  stroke: var(--background);
+  stroke-width: 1.5;
+  transition: r 120ms ease;
+}
+
+.chart-label-guide {
+  opacity: 0.45;
+  stroke-width: 1;
+}
+
+.chart-end-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.chart-axis-label {
+  fill: #788486;
+  font-family: var(--font-mono);
+  font-size: 8px;
+}
+
+.empty-chart {
+  align-items: center;
+  color: var(--muted);
+  display: flex;
+  justify-content: center;
+  min-height: 220px;
+  padding: 24px;
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  html,
+  body,
+  #root {
+    height: auto;
+    min-height: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow: auto;
+  }
+
+  main {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .board-shell,
+  .leaderboard-grid {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: auto;
+  }
+
+  .rank-list {
+    align-self: start;
+    max-height: none;
+    width: 100%;
+  }
+
+  .rank-row {
+    flex-basis: 64px;
+    min-height: 64px;
+  }
+
+  .progress-chart {
+    height: 360px;
+    min-height: 360px;
+  }
+
+  .chart-panel {
+    padding: 18px 0 0;
+  }
+}
+
+@media (max-width: 620px) {
+  main {
+    padding-block: 10px;
+    width: calc(100% - 20px);
+  }
+
+  .rank-list {
+    overflow-x: auto;
+  }
+
+  .rank-header,
+  .rank-row {
+    grid-template-columns: 40px minmax(125px, 1fr) 62px 105px;
+    min-width: 410px;
+    padding-inline: 10px;
+  }
+
+}

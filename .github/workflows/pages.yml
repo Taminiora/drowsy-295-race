@@ -1,0 +1,79 @@
+name: Update and deploy leaderboard
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # GitHub cron uses UTC. Run at both possible noon-Pacific UTC hours, then
+    # let the first step keep only the one that is noon in Los Angeles.
+    - cron: "0 19 * * *"
+    - cron: "0 20 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.schedule.outputs.should_run }}
+    steps:
+      - name: Check noon Pacific schedule
+        id: schedule
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" != "schedule" || "$(TZ=America/Los_Angeles date +%H)" == "12" ]]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v6
+        if: steps.schedule.outputs.should_run == 'true'
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-node@v6
+        if: steps.schedule.outputs.should_run == 'true'
+        with:
+          node-version: 22
+          cache: npm
+      - if: steps.schedule.outputs.should_run == 'true'
+        run: npm ci
+      - name: Fetch today's rankings
+        if: steps.schedule.outputs.should_run == 'true' && github.event_name != 'push'
+        run: npm run update-data
+      - name: Save today's history
+        if: steps.schedule.outputs.should_run == 'true' && github.event_name != 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/history.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update daily rankings"
+            git push
+          fi
+      - if: steps.schedule.outputs.should_run == 'true'
+        run: npm run build
+      - if: steps.schedule.outputs.should_run == 'true'
+        uses: actions/configure-pages@v5
+      - if: steps.schedule.outputs.should_run == 'true'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    if: needs.build.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
