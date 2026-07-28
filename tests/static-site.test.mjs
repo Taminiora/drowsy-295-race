@@ -5,10 +5,11 @@ import test from "node:test";
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
 test("the built site is a static Drowsy leaderboard", async () => {
-  const [app, html, data] = await Promise.all([
+  const [app, html, data, shareImage] = await Promise.all([
     read("src/App.tsx"),
     read("dist/index.html"),
     read("src/data/history.json"),
+    access(new URL("../dist/og-graph.jpg", import.meta.url)),
   ]);
 
   assert.match(app, /7-day progress/);
@@ -44,6 +45,12 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(styles, /\.progress-chart \{\s+flex: 1;\s+min-height: 0;/);
   assert.match(styles, /\.rank-list \{\s+align-self: center;/);
   assert.match(html, /<div id="root"><\/div>/);
+  assert.match(
+    html,
+    /property="og:image"\s+content="https:\/\/taminiora\.github\.io\/drowsy-295-race\/og-graph\.jpg"/,
+  );
+  assert.match(html, /name="twitter:card" content="summary_large_image"/);
+  assert.equal(shareImage, undefined);
   const parsed = JSON.parse(data);
   assert.equal(parsed.title, "drowsy 295 race");
   assert.deepEqual(
