@@ -9,7 +9,7 @@ test("the built site is a static Drowsy leaderboard", async () => {
     read("src/App.tsx"),
     read("dist/index.html"),
     read("src/data/history.json"),
-    access(new URL("../dist/og-graph.jpg", import.meta.url)),
+    access(new URL("../dist/og-horse-track.jpg", import.meta.url)),
   ]);
 
   assert.doesNotMatch(app, /7-day progress/);
@@ -22,7 +22,9 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(app, /--horse-delay/);
   assert.match(app, /ascii-lane/);
   assert.match(app, /ascii-progress-strip/);
-  assert.match(app, /const \[honseMode, setHonseMode\] = useState\(false\)/);
+  assert.match(app, /URLSearchParams\(window\.location\.search\)\.has\("embed"\)/);
+  assert.match(app, /const \[honseMode, setHonseMode\] = useState\(embedMode\)/);
+  assert.match(app, /\{!embedMode && \(/);
   assert.match(app, /aria-pressed=\{honseMode\}/);
   assert.match(app, />\s*honse mode\s*<\/button>/);
   assert.match(app, /\{!honseMode && \(/);
@@ -57,6 +59,9 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(styles, /\.progress-chart \{\s+flex: 1;\s+min-height: 0;/);
   assert.match(styles, /\.rank-list \{\s+align-self: center;/);
   assert.match(styles, /\.honse-mode \.ascii-progress-strip/);
+  assert.match(styles, /\.embed-mode \{/);
+  assert.match(styles, /height: 630px/);
+  assert.match(styles, /width: 1200px/);
   assert.match(styles, /\.honse-toggle\[aria-pressed="true"\]/);
   assert.match(styles, /@keyframes horse-step-a/);
   assert.match(styles, /@keyframes horse-step-b/);
@@ -64,9 +69,16 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(html, /<div id="root"><\/div>/);
   assert.match(html, /<title>honse<\/title>/);
   assert.match(html, /property="og:title" content="honse"/);
+  assert.match(html, /name="description" content="honse"/);
+  assert.match(html, /property="og:description" content="honse"/);
+  assert.match(html, /name="twitter:description" content="honse"/);
   assert.match(
     html,
-    /property="og:image"\s+content="https:\/\/taminiora\.github\.io\/drowsy-295-race\/og-graph\.jpg"/,
+    /property="og:image"\s+content="https:\/\/taminiora\.github\.io\/drowsy-295-race\/og-horse-track\.jpg"/,
+  );
+  assert.match(
+    html,
+    /name="twitter:image"\s+content="https:\/\/taminiora\.github\.io\/drowsy-295-race\/og-horse-track\.jpg"/,
   );
   assert.match(html, /name="twitter:card" content="summary_large_image"/);
   assert.equal(shareImage, undefined);
@@ -112,6 +124,7 @@ test("the built site is a static Drowsy leaderboard", async () => {
   const yugameru = parsed.characters.find(
     (character) => character.name === "Yugameru",
   );
+  assert.equal(yugameru.color, "#9a7585");
   assert.equal(yugameru.snapshots[2].progress, 10.597);
   assert.equal(yugameru.snapshots[3].progress, 10.597);
 });

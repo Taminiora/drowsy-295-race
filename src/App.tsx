@@ -50,20 +50,29 @@ const ASCII_TRACK =
   "----------------------------------------------------------------------------------------------------------------------------------------------------------------";
 
 export function App() {
-  const [honseMode, setHonseMode] = useState(false);
+  const embedMode = new URLSearchParams(window.location.search).has("embed");
+  const [honseMode, setHonseMode] = useState(embedMode);
   const data = history as LeaderboardData;
   const members = buildMembers(data);
+  const mainClassName = [
+    honseMode ? "honse-mode" : "",
+    embedMode ? "embed-mode" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <main className={honseMode ? "honse-mode" : undefined}>
-      <button
-        aria-pressed={honseMode}
-        className="honse-toggle"
-        onClick={() => setHonseMode((enabled) => !enabled)}
-        type="button"
-      >
-        honse mode
-      </button>
+    <main className={mainClassName || undefined}>
+      {!embedMode && (
+        <button
+          aria-pressed={honseMode}
+          className="honse-toggle"
+          onClick={() => setHonseMode((enabled) => !enabled)}
+          type="button"
+        >
+          honse mode
+        </button>
+      )}
       <div className="board-shell">
         {!honseMode && (
           <div className="leaderboard-grid">

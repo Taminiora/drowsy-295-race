@@ -97,6 +97,60 @@ main {
   width: 100%;
 }
 
+.embed-mode {
+  height: 630px;
+  min-height: 630px;
+  padding: 0;
+  width: 1200px;
+}
+
+.embed-mode .board-shell {
+  height: 630px;
+}
+
+.embed-mode .ascii-progress-strip {
+  padding: 28px 32px;
+}
+
+.embed-mode .ascii-race {
+  min-width: 0;
+}
+
+.embed-mode .ascii-axis,
+.embed-mode .ascii-lane {
+  gap: 16px;
+  grid-template-columns: 140px minmax(0, 1fr) 70px;
+}
+
+.embed-mode .ascii-axis {
+  font-size: 12px;
+  height: 20px;
+}
+
+.embed-mode .ascii-lane {
+  font-size: 13px;
+  height: 52px;
+}
+
+.embed-mode .ascii-lane > strong {
+  font-size: 13px;
+}
+
+.embed-mode .ascii-track {
+  font-size: 13px;
+  line-height: 52px;
+}
+
+.embed-mode .ascii-horse {
+  left: clamp(0px, var(--progress), calc(100% - 70px));
+  line-height: 12px;
+  top: 8px;
+}
+
+.embed-mode .ascii-horse > span {
+  height: 12px;
+}
+
 .leaderboard-grid {
   display: grid;
   flex: 1;
