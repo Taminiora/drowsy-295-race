@@ -12,8 +12,10 @@ test("the built site is a static Drowsy leaderboard", async () => {
     access(new URL("../dist/og-graph.jpg", import.meta.url)),
   ]);
 
-  assert.match(app, /7-day progress/);
-  assert.match(app, /<span>%<\/span>/);
+  assert.doesNotMatch(app, /7-day progress/);
+  assert.match(app, /aria-label="ascii progress"/);
+  assert.match(app, /asciiBar/);
+  assert.match(app, /ascii-progress-strip/);
   assert.match(app, /lv\./);
   const [chart, styles] = await Promise.all([
     read("src/ProgressChart.tsx"),
@@ -45,6 +47,8 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(styles, /\.progress-chart \{\s+flex: 1;\s+min-height: 0;/);
   assert.match(styles, /\.rank-list \{\s+align-self: center;/);
   assert.match(html, /<div id="root"><\/div>/);
+  assert.match(html, /<title>honse<\/title>/);
+  assert.match(html, /property="og:title" content="honse"/);
   assert.match(
     html,
     /property="og:image"\s+content="https:\/\/taminiora\.github\.io\/drowsy-295-race\/og-graph\.jpg"/,

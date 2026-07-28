@@ -43,6 +43,16 @@ function buildMembers(data: LeaderboardData): LeaderboardMember[] {
   }));
 }
 
+function asciiBar(progress: number) {
+  const width = 16;
+  const position = Math.min(
+    width,
+    Math.max(1, Math.round((Math.min(100, Math.max(0, progress)) / 100) * width)),
+  );
+
+  return `[${"=".repeat(position - 1)}>${".".repeat(width - position)}]`;
+}
+
 export function App() {
   const data = history as LeaderboardData;
   const members = buildMembers(data);
@@ -112,13 +122,25 @@ export function App() {
           </div>
 
           <div className="chart-panel">
-            <div className="chart-heading">
-              <h2>7-day progress</h2>
-              <span>%</span>
-            </div>
             <ProgressChart members={members} />
           </div>
         </div>
+
+        <section aria-label="ascii progress" className="ascii-progress-strip">
+          {members.map((member) => (
+            <div
+              className="ascii-progress"
+              key={member.name}
+              style={{ "--member-color": member.color } as CSSProperties}
+            >
+              <span className="ascii-progress-label">
+                <strong>{member.name}</strong>
+                <span>{member.current.progress.toFixed(1)}%</span>
+              </span>
+              <code>{asciiBar(member.current.progress)}</code>
+            </div>
+          ))}
+        </section>
       </div>
     </main>
   );

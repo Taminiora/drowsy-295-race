@@ -49,6 +49,8 @@ main {
 
 .board-shell {
   background: transparent;
+  display: flex;
+  flex-direction: column;
   flex: 1;
   height: 100%;
   min-height: 0;
@@ -57,8 +59,9 @@ main {
 
 .leaderboard-grid {
   display: grid;
+  flex: 1;
   grid-template-columns: minmax(360px, 0.7fr) minmax(0, 1.3fr);
-  height: 100%;
+  height: auto;
   min-height: 0;
 }
 
@@ -177,24 +180,6 @@ main {
   min-height: 0;
   min-width: 0;
   padding: 0 0 12px 24px;
-}
-
-.chart-heading {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  min-height: 32px;
-}
-
-.chart-heading h2 {
-  color: var(--heading);
-  font-size: 14px;
-  margin: 0;
-}
-
-.chart-heading span {
-  color: var(--muted);
-  font-size: 10px;
 }
 
 .projection-row {
@@ -346,6 +331,44 @@ main {
   text-align: center;
 }
 
+.ascii-progress-strip {
+  align-items: center;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex: 0 0 54px;
+  gap: 20px;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 7px 8px 0;
+}
+
+.ascii-progress {
+  color: var(--member-color);
+  flex: 1 0 160px;
+  font-size: 9px;
+  min-width: 0;
+}
+
+.ascii-progress-label {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.ascii-progress-label strong {
+  font-weight: 600;
+}
+
+.ascii-progress code {
+  color: var(--member-color);
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.2;
+  margin-top: 2px;
+  white-space: pre;
+}
+
 @media (max-width: 860px) {
   html,
   body,
@@ -366,8 +389,13 @@ main {
     min-height: 100dvh;
   }
 
-  .board-shell,
+  .board-shell {
+    height: auto;
+    min-height: auto;
+  }
+
   .leaderboard-grid {
+    flex: none;
     grid-template-columns: 1fr;
     height: auto;
     min-height: auto;
@@ -391,6 +419,11 @@ main {
 
   .chart-panel {
     padding: 18px 0 0;
+  }
+
+  .ascii-progress-strip {
+    margin-top: 18px;
+    padding-bottom: 8px;
   }
 }
 
