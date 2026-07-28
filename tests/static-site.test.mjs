@@ -1,6 +1,14 @@
 import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
+import {
+  compareRaceEntries,
+  dailyGainRate,
+  firstFinishSnapshot,
+  horseStepDuration,
+  horseStepSpeed,
+  raceProgress,
+} from "../src/rankings.ts";
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
@@ -20,6 +28,7 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(app, /ascii-horse/);
   assert.match(app, /ascii-horse-legs/);
   assert.match(app, /--horse-delay/);
+  assert.match(app, /--horse-step-duration/);
   assert.match(app, /ascii-lane/);
   assert.match(app, /ascii-progress-strip/);
   assert.match(app, /URLSearchParams\(window\.location\.search\)\.has\("embed"\)/);
@@ -29,6 +38,9 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(app, />\s*honse mode\s*<\/button>/);
   assert.match(app, /\{!honseMode && \(/);
   assert.match(app, /lv\./);
+  assert.match(app, /className="rank-crown"/);
+  assert.match(app, /aria-label="finished"/);
+  assert.match(app, /raceProgress\(member\.current\)/);
   const [chart, styles] = await Promise.all([
     read("src/ProgressChart.tsx"),
     read("src/styles.css"),
@@ -74,6 +86,10 @@ test("the built site is a static Drowsy leaderboard", async () => {
   );
   assert.match(styles, /@keyframes horse-step-a/);
   assert.match(styles, /@keyframes horse-step-b/);
+  assert.match(
+    styles,
+    /animation-duration: var\(--horse-step-duration, 620ms\)/,
+  );
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(html, /<div id="root"><\/div>/);
   assert.match(html, /<title>honse<\/title>/);
@@ -136,6 +152,92 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.equal(yugameru.color, "#9a7585");
   assert.equal(yugameru.snapshots[2].progress, 10.597);
   assert.equal(yugameru.snapshots[3].progress, 10.597);
+});
+
+test("finished characters keep their race placement", () => {
+  const makeSnapshot = (date, level, expCurrent, progress) => ({
+    date,
+    level,
+    expCurrent,
+    expToNext: level >= 295 ? "870403132500699" : "430892639851831",
+    progress,
+    world: "Kronos",
+    job: "Beginner",
+  });
+  const characters = [
+    {
+      name: "early",
+      region: "NA",
+      color: "#fff",
+      snapshots: [
+        makeSnapshot("2026-07-28", 294, "400000000000000", 92),
+        makeSnapshot("2026-07-29", 295, "10000000000000", 1),
+        makeSnapshot("2026-07-30", 295, "12000000000000", 1.2),
+      ],
+    },
+    {
+      name: "later",
+      region: "NA",
+      color: "#fff",
+      snapshots: [
+        makeSnapshot("2026-07-28", 294, "410000000000000", 95),
+        makeSnapshot("2026-07-29", 294, "425000000000000", 99),
+        makeSnapshot("2026-07-30", 295, "50000000000000", 5),
+      ],
+    },
+    {
+      name: "racing",
+      region: "NA",
+      color: "#fff",
+      snapshots: [
+        makeSnapshot("2026-07-28", 294, "420000000000000", 97),
+        makeSnapshot("2026-07-29", 294, "428000000000000", 99.3),
+        makeSnapshot("2026-07-30", 294, "430000000000000", 99.8),
+      ],
+    },
+  ];
+
+  const ranked = [...characters].sort((left, right) =>
+    compareRaceEntries(
+      left,
+      left.snapshots.at(-1),
+      right,
+      right.snapshots.at(-1),
+    ),
+  );
+
+  assert.deepEqual(
+    ranked.map((character) => character.name),
+    ["early", "later", "racing"],
+  );
+  assert.equal(
+    firstFinishSnapshot(characters[0], "2026-07-30")?.date,
+    "2026-07-29",
+  );
+  assert.equal(raceProgress(characters[0].snapshots.at(-1)), 100);
+});
+
+test("horse leg speed scales with the latest daily gain", () => {
+  const lowestGain = dailyGainRate("10", "1000");
+  const middleGain = dailyGainRate("25", "1000");
+  const highestGain = dailyGainRate("40", "1000");
+  const lowSpeed = horseStepSpeed(lowestGain, lowestGain, highestGain);
+  const middleSpeed = horseStepSpeed(
+    middleGain,
+    lowestGain,
+    highestGain,
+  );
+  const highSpeed = horseStepSpeed(
+    highestGain,
+    lowestGain,
+    highestGain,
+  );
+
+  assert.equal(lowSpeed, 380);
+  assert.equal(middleSpeed, 500);
+  assert.equal(highSpeed, 620);
+  assert.equal(horseStepDuration(lowSpeed), 620);
+  assert.equal(horseStepDuration(highSpeed), 380);
 });
 
 test("the project has no server or database runtime", async () => {

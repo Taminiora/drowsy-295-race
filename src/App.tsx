@@ -1,8 +1,16 @@
 import type { CSSProperties } from "react";
 import { useState } from "react";
 import history from "./data/history.json";
-import { compareSnapshots, dailyGain, formatExp } from "./format";
+import { dailyGain, formatExp } from "./format";
 import { ProgressChart } from "./ProgressChart";
+import {
+  compareRaceEntries,
+  dailyGainRate,
+  firstFinishSnapshot,
+  horseStepDuration,
+  horseStepSpeed,
+  raceProgress,
+} from "./rankings";
 import type {
   LeaderboardData,
   LeaderboardMember,
@@ -19,18 +27,19 @@ function buildMembers(data: LeaderboardData): LeaderboardMember[] {
         ...character,
         current,
         previous,
+        finishedOn: firstFinishSnapshot(character, current.date)?.date ?? null,
         movement: null,
         dailyGain: dailyGain(current, previous),
       };
     });
 
   const currentOrder = [...members].sort((left, right) =>
-    compareSnapshots(left.current, right.current),
+    compareRaceEntries(left, left.current, right, right.current),
   );
   const previousOrder = [...members].sort((left, right) => {
     if (!left.previous) return 1;
     if (!right.previous) return -1;
-    return compareSnapshots(left.previous, right.previous);
+    return compareRaceEntries(left, left.previous, right, right.previous);
   });
   const previousRanks = new Map(
     previousOrder.map((member, index) => [member.name, index + 1]),
@@ -54,6 +63,20 @@ export function App() {
   const [honseMode, setHonseMode] = useState(embedMode);
   const data = history as LeaderboardData;
   const members = buildMembers(data);
+  const horseGainRates = new Map(
+    members.map((member) => [
+      member.name,
+      dailyGainRate(
+        member.dailyGain,
+        member.previous?.expToNext ?? null,
+      ),
+    ]),
+  );
+  const measuredGainRates = [...horseGainRates.values()].filter(
+    (gainRate): gainRate is number => gainRate !== null,
+  );
+  const lowestGainRate = Math.min(...measuredGainRates);
+  const highestGainRate = Math.max(...measuredGainRates);
   const mainClassName = [
     honseMode ? "honse-mode" : "",
     embedMode ? "embed-mode" : "",
@@ -85,7 +108,18 @@ export function App() {
               </div>
               {members.map((member, index) => (
                 <div className="rank-row" key={member.name}>
-                  <span className="rank-number">{index + 1}</span>
+                  <span className="rank-number">
+                    {index + 1}
+                    {member.finishedOn ? (
+                      <span
+                        aria-label="finished"
+                        className="rank-crown"
+                        title={`finished ${member.finishedOn}`}
+                      >
+                        ♛
+                      </span>
+                    ) : null}
+                  </span>
                   <div className="character">
                     <span>
                       <strong>{member.name}</strong>
@@ -127,7 +161,7 @@ export function App() {
                     <div className="progress-track">
                       <span
                         style={{
-                          width: `${Math.max(1, member.current.progress)}%`,
+                          width: `${Math.max(1, raceProgress(member.current))}%`,
                         }}
                       />
                     </div>
@@ -152,40 +186,52 @@ export function App() {
               </span>
               <span />
             </div>
-            {members.map((member, index) => (
-              <div
-                className="ascii-lane"
-                key={member.name}
-                style={
-                  {
-                    "--member-color": member.color,
-                    "--horse-delay": `${index * -70}ms`,
-                    "--progress": `${member.current.progress}%`,
-                  } as CSSProperties
-                }
-              >
-                <strong>{member.name}</strong>
-                <code className="ascii-track">
-                  <span aria-hidden="true">{ASCII_TRACK}</span>
-                  <b
-                    aria-label={`${member.name} at ${member.current.progress.toFixed(1)} percent`}
-                    className="ascii-horse"
-                  >
-                    {ASCII_HORSE.map((line) => (
-                      <span key={line}>{line}</span>
-                    ))}
-                    <span aria-hidden="true" className="ascii-horse-legs">
-                      {ASCII_HORSE_LEGS.map((legs, frame) => (
-                        <i className={`ascii-leg-frame frame-${frame}`} key={legs}>
-                          {legs}
-                        </i>
+            {members.map((member, index) => {
+              const progress = raceProgress(member.current);
+              const horseSpeed = horseStepSpeed(
+                horseGainRates.get(member.name) ?? null,
+                lowestGainRate,
+                highestGainRate,
+              );
+              return (
+                <div
+                  className="ascii-lane"
+                  key={member.name}
+                  style={
+                    {
+                      "--member-color": member.color,
+                      "--horse-delay": `${index * -70}ms`,
+                      "--horse-step-duration": `${horseStepDuration(horseSpeed)}ms`,
+                      "--progress": `${progress}%`,
+                    } as CSSProperties
+                  }
+                >
+                  <strong>{member.name}</strong>
+                  <code className="ascii-track">
+                    <span aria-hidden="true">{ASCII_TRACK}</span>
+                    <b
+                      aria-label={`${member.name} at ${progress.toFixed(1)} percent`}
+                      className="ascii-horse"
+                    >
+                      {ASCII_HORSE.map((line) => (
+                        <span key={line}>{line}</span>
                       ))}
-                    </span>
-                  </b>
-                </code>
-                <span>{member.current.progress.toFixed(1)}%</span>
-              </div>
-            ))}
+                      <span aria-hidden="true" className="ascii-horse-legs">
+                        {ASCII_HORSE_LEGS.map((legs, frame) => (
+                          <i
+                            className={`ascii-leg-frame frame-${frame}`}
+                            key={legs}
+                          >
+                            {legs}
+                          </i>
+                        ))}
+                      </span>
+                    </b>
+                  </code>
+                  <span>{progress.toFixed(1)}%</span>
+                </div>
+              );
+            })}
           </div>
         </section>
       </div>

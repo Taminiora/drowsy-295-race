@@ -20,13 +20,6 @@ export function formatDate(value: string): string {
   }).format(new Date(`${value}T12:00:00Z`));
 }
 
-export function compareSnapshots(left: Snapshot, right: Snapshot) {
-  if (left.level !== right.level) return right.level - left.level;
-  const leftExp = BigInt(left.expCurrent);
-  const rightExp = BigInt(right.expCurrent);
-  return leftExp === rightExp ? 0 : leftExp > rightExp ? -1 : 1;
-}
-
 export function dailyGain(
   current: Snapshot,
   previous: Snapshot | null,

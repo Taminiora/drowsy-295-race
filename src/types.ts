@@ -25,6 +25,7 @@ export type LeaderboardData = {
 export type LeaderboardMember = CharacterHistory & {
   current: Snapshot;
   previous: Snapshot | null;
+  finishedOn: string | null;
   movement: number | null;
   dailyGain: string | null;
 };

@@ -196,7 +196,16 @@ main {
 }
 
 .rank-number {
+  align-items: center;
   color: var(--text);
+  display: flex;
+  gap: 4px;
+}
+
+.rank-crown {
+  color: var(--heading);
+  font-size: 11px;
+  line-height: 1;
 }
 
 .character {
@@ -516,7 +525,7 @@ main {
 }
 
 .ascii-leg-frame {
-  animation-duration: 480ms;
+  animation-duration: var(--horse-step-duration, 620ms);
   animation-iteration-count: infinite;
   animation-timing-function: steps(1, end);
   font-style: normal;
