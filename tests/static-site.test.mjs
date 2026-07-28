@@ -42,6 +42,9 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.doesNotMatch(chart, /chart-trend-line/);
   assert.match(chart, /clipPath="url\(#plot-clip\)"/);
   assert.match(chart, /preserveAspectRatio="xMinYMid meet"/);
+  assert.match(chart, /new ResizeObserver\(updateChartWidth\)/);
+  assert.match(chart, /Math\.round\(\(HEIGHT \* width\) \/ height\)/);
+  assert.match(chart, /viewBox=\{`0 0 \$\{chartWidth\} \$\{HEIGHT\}`\}/);
   assert.match(chart, /x1=\{x\(0\)\}/);
   assert.match(chart, /y1=\{y\(latestValue - dailyPace \* currentDay\)\}/);
   assert.match(chart, /className="chart-projection-hit"/);

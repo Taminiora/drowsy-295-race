@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import type { LeaderboardMember, Snapshot } from "./types";
 
-const WIDTH = 600;
+const MIN_WIDTH = 600;
 const HEIGHT = 520;
 const PAD_LEFT = 18;
 const PAD_RIGHT = 116;
@@ -80,8 +80,32 @@ export function ProgressChart({
 }: {
   members: LeaderboardMember[];
 }) {
+  const chartRef = useRef<HTMLDivElement>(null);
+  const [chartWidth, setChartWidth] = useState(MIN_WIDTH);
   const [showProjection, setShowProjection] = useState(false);
   const [activePoint, setActivePoint] = useState<string | null>(null);
+  useLayoutEffect(() => {
+    const chart = chartRef.current;
+    if (!chart) return;
+
+    const updateChartWidth = () => {
+      const { height, width } = chart.getBoundingClientRect();
+      if (height <= 0 || width <= 0) return;
+      const nextWidth = Math.max(
+        MIN_WIDTH,
+        Math.round((HEIGHT * width) / height),
+      );
+      setChartWidth((currentWidth) =>
+        currentWidth === nextWidth ? currentWidth : nextWidth,
+      );
+    };
+
+    updateChartWidth();
+    const observer = new ResizeObserver(updateChartWidth);
+    observer.observe(chart);
+    return () => observer.disconnect();
+  }, []);
+
   const chartMembers = members
     .map((member) => ({ ...member, snapshots: member.snapshots.slice(-7) }))
     .filter((member) => member.snapshots.length > 1);
@@ -106,7 +130,7 @@ export function ProgressChart({
   const min = 0;
   const max = 100;
   const drawableHeight = HEIGHT - PAD_TOP - PAD_BOTTOM;
-  const plotRight = WIDTH - PAD_RIGHT;
+  const plotRight = chartWidth - PAD_RIGHT;
   const plotBottom = HEIGHT - PAD_BOTTOM;
   const paceByName = new Map(
     chartMembers.map((member) => [
@@ -264,14 +288,14 @@ export function ProgressChart({
           </span>
         ) : null}
       </div>
-      <div className="progress-chart">
+      <div className="progress-chart" ref={chartRef}>
         <svg
           aria-label="seven day character progress through level 294"
           onPointerLeave={() => setActivePoint(null)}
           onPointerMove={handleChartPointerMove}
           preserveAspectRatio="xMinYMid meet"
           role="img"
-          viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+          viewBox={`0 0 ${chartWidth} ${HEIGHT}`}
         >
           <defs>
             <clipPath id="plot-clip">
