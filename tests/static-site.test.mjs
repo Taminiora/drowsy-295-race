@@ -13,9 +13,19 @@ test("the built site is a static Drowsy leaderboard", async () => {
   ]);
 
   assert.doesNotMatch(app, /7-day progress/);
-  assert.match(app, /aria-label="ascii progress"/);
-  assert.match(app, /asciiBar/);
+  assert.match(app, /aria-label="ascii horse race"/);
+  assert.match(app, /ASCII_HORSE/);
+  assert.match(app, /ASCII_HORSE_LEGS/);
+  assert.match(app, /ASCII_TRACK/);
+  assert.match(app, /ascii-horse/);
+  assert.match(app, /ascii-horse-legs/);
+  assert.match(app, /--horse-delay/);
+  assert.match(app, /ascii-lane/);
   assert.match(app, /ascii-progress-strip/);
+  assert.match(app, /const \[honseMode, setHonseMode\] = useState\(false\)/);
+  assert.match(app, /aria-pressed=\{honseMode\}/);
+  assert.match(app, />\s*honse mode\s*<\/button>/);
+  assert.match(app, /\{!honseMode && \(/);
   assert.match(app, /lv\./);
   const [chart, styles] = await Promise.all([
     read("src/ProgressChart.tsx"),
@@ -46,6 +56,11 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(styles, /height: 100dvh/);
   assert.match(styles, /\.progress-chart \{\s+flex: 1;\s+min-height: 0;/);
   assert.match(styles, /\.rank-list \{\s+align-self: center;/);
+  assert.match(styles, /\.honse-mode \.ascii-progress-strip/);
+  assert.match(styles, /\.honse-toggle\[aria-pressed="true"\]/);
+  assert.match(styles, /@keyframes horse-step-a/);
+  assert.match(styles, /@keyframes horse-step-b/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(html, /<div id="root"><\/div>/);
   assert.match(html, /<title>honse<\/title>/);
   assert.match(html, /property="og:title" content="honse"/);
@@ -59,7 +74,16 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.equal(parsed.title, "drowsy 295 race");
   assert.deepEqual(
     parsed.characters.map((character) => character.name),
-    ["karinay", "tamitamitami", "nelo", "edison", "Pãck"],
+    [
+      "karinay",
+      "tamitamitami",
+      "nelo",
+      "edison",
+      "Pãck",
+      "xZenjiro",
+      "RoyaiOrange",
+      "Yugameru",
+    ],
   );
 
   const pack = parsed.characters.find(
@@ -70,6 +94,26 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.equal(pack.snapshots[4].level, 293);
   assert.equal(pack.snapshots[5].level, 294);
   assert.equal(pack.snapshots.at(-1).progress, 5.049);
+
+  const seededPriorDay = new Map([
+    ["xZenjiro", [38.744, 55.059]],
+    ["RoyaiOrange", [18.003, 29.546]],
+    ["Yugameru", [6.972, 22.857]],
+  ]);
+  for (const [name, [firstProgress, priorDayProgress]] of seededPriorDay) {
+    const character = parsed.characters.find((entry) => entry.name === name);
+    assert.equal(character.snapshots.length, 8);
+    assert.equal(character.snapshots[0].date, "2026-07-21");
+    assert.equal(character.snapshots[0].progress, firstProgress);
+    assert.equal(character.snapshots[6].date, "2026-07-27");
+    assert.equal(character.snapshots[6].progress, priorDayProgress);
+  }
+
+  const yugameru = parsed.characters.find(
+    (character) => character.name === "Yugameru",
+  );
+  assert.equal(yugameru.snapshots[2].progress, 10.597);
+  assert.equal(yugameru.snapshots[3].progress, 10.597);
 });
 
 test("the project has no server or database runtime", async () => {

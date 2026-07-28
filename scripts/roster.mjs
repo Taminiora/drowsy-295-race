@@ -4,4 +4,7 @@ export const ROSTER = [
   { name: "nelo", region: "NA", color: "#b16668" },
   { name: "edison", region: "NA", color: "#6a88a0" },
   { name: "Pãck", region: "NA", color: "#a58a5f" },
+  { name: "xZenjiro", region: "NA", color: "#5f8f88" },
+  { name: "RoyaiOrange", region: "NA", color: "#b07d55" },
+  { name: "Yugameru", region: "NA", color: "#9a7585" },
 ];

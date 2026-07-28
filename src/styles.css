@@ -47,6 +47,30 @@ main {
   width: calc(100% - 32px);
 }
 
+.honse-toggle {
+  background: var(--background);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 9px;
+  left: 8px;
+  line-height: 1;
+  padding: 5px 7px;
+  position: fixed;
+  text-transform: lowercase;
+  top: 8px;
+  z-index: 10;
+}
+
+.honse-toggle:hover,
+.honse-toggle:focus-visible,
+.honse-toggle[aria-pressed="true"] {
+  border-color: var(--heading);
+  color: var(--heading);
+  outline: none;
+}
+
 .board-shell {
   background: transparent;
   display: flex;
@@ -55,6 +79,22 @@ main {
   height: 100%;
   min-height: 0;
   text-transform: lowercase;
+}
+
+.honse-mode .board-shell {
+  justify-content: center;
+}
+
+.honse-mode .ascii-progress-strip {
+  align-items: center;
+  border-top: 0;
+  display: flex;
+  flex: 1;
+  padding-inline: 8px;
+}
+
+.honse-mode .ascii-race {
+  width: 100%;
 }
 
 .leaderboard-grid {
@@ -332,41 +372,147 @@ main {
 }
 
 .ascii-progress-strip {
-  align-items: center;
   border-top: 1px solid var(--line);
-  display: flex;
-  flex: 0 0 54px;
-  gap: 20px;
+  flex: 0 0 auto;
   min-width: 0;
   overflow-x: auto;
-  padding: 7px 8px 0;
+  padding: 5px 8px 6px;
 }
 
-.ascii-progress {
-  color: var(--member-color);
-  flex: 1 0 160px;
-  font-size: 9px;
-  min-width: 0;
+.ascii-race {
+  min-width: 720px;
+  width: 100%;
 }
 
-.ascii-progress-label {
-  display: flex;
+.ascii-axis,
+.ascii-lane {
+  align-items: center;
+  display: grid;
   gap: 8px;
+  grid-template-columns: 92px minmax(0, 1fr) 42px;
+}
+
+.ascii-axis {
+  color: var(--muted);
+  font-size: 8px;
+  height: 12px;
+}
+
+.ascii-axis > span:nth-child(2) {
+  display: flex;
   justify-content: space-between;
 }
 
-.ascii-progress-label strong {
-  font-weight: 600;
+.ascii-axis i {
+  font-style: normal;
 }
 
-.ascii-progress code {
+.ascii-lane {
   color: var(--member-color);
-  display: block;
+  font-size: 9px;
+  height: 26px;
+}
+
+.ascii-lane > strong {
+  font-size: 9px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ascii-lane > span {
+  text-align: right;
+}
+
+.ascii-track {
+  color: var(--line);
   font-family: var(--font-mono);
   font-size: 9px;
-  line-height: 1.2;
-  margin-top: 2px;
+  line-height: 26px;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+}
+
+.ascii-track > span {
+  letter-spacing: 1px;
+}
+
+.ascii-horse {
+  background: var(--background);
+  color: var(--member-color);
+  display: grid;
+  font-weight: 600;
+  left: clamp(0px, var(--progress), calc(100% - 48px));
+  line-height: 8px;
+  padding-inline: 2px;
+  position: absolute;
+  top: 1px;
+}
+
+.ascii-horse > span {
+  display: block;
+  height: 8px;
   white-space: pre;
+}
+
+.ascii-horse-legs {
+  position: relative;
+}
+
+.ascii-leg-frame {
+  animation-duration: 480ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(1, end);
+  font-style: normal;
+  inset: 0;
+  position: absolute;
+  white-space: pre;
+}
+
+.ascii-leg-frame.frame-0 {
+  animation-delay: var(--horse-delay);
+  animation-name: horse-step-a;
+}
+
+.ascii-leg-frame.frame-1 {
+  animation-delay: var(--horse-delay);
+  animation-name: horse-step-b;
+}
+
+@keyframes horse-step-a {
+  0%,
+  49.9% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes horse-step-b {
+  0%,
+  49.9% {
+    opacity: 0;
+  }
+
+  50%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ascii-leg-frame {
+    animation: none;
+  }
+
+  .ascii-leg-frame.frame-1 {
+    display: none;
+  }
 }
 
 @media (max-width: 860px) {

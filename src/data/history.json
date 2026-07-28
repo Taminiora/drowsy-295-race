@@ -397,6 +397,243 @@
           "job": "Aran"
         }
       ]
+    },
+    {
+      "name": "xZenjiro",
+      "region": "NA",
+      "color": "#5f8f88",
+      "snapshots": [
+        {
+          "date": "2026-07-21",
+          "level": 294,
+          "expCurrent": "166946704946734",
+          "expToNext": "430892639851831",
+          "progress": 38.744,
+          "world": "Kronos",
+          "job": "Dawn Warrior"
+        },
+        {
+          "date": "2026-07-22",
+          "level": 294,
+          "expCurrent": "174036704946734",
+          "expToNext": "430892639851831",
+          "progress": 40.389,
+          "world": "Kronos",
+          "job": "Dawn Warrior"
+        },
+        {
+          "date": "2026-07-23",
+          "level": 294,
+          "expCurrent": "180436704946734",
+          "expToNext": "430892639851831",
+          "progress": 41.875,
+          "world": "Kronos",
+          "job": "Dawn Warrior"
+        },
+        {
+          "date": "2026-07-24",
+          "level": 294,
+          "expCurrent": "190516704946734",
+          "expToNext": "430892639851831",
+          "progress": 44.214,
+          "world": "Kronos",
+          "job": "Dawn Warrior"
+        },
+        {
+          "date": "2026-07-25",
+          "level": 294,
+          "expCurrent": "201026704946734",
+          "expToNext": "430892639851831",
+          "progress": 46.653,
+          "world": "Kronos",
+          "job": "Dawn Warrior"
+        },
+        {
+          "date": "2026-07-26",
+          "level": 294,
+          "expCurrent": "221006704946734",
+          "expToNext": "430892639851831",
+          "progress": 51.29,
+          "world": "Kronos",
+          "job": "Dawn Warrior"
+        },
+        {
+          "date": "2026-07-27",
+          "level": 294,
+          "expCurrent": "237246704946734",
+          "expToNext": "430892639851831",
+          "progress": 55.059,
+          "world": "Kronos",
+          "job": "Dawn Warrior"
+        },
+        {
+          "date": "2026-07-28",
+          "level": 294,
+          "expCurrent": "251516704946734",
+          "expToNext": "430892639851831",
+          "progress": 58.371,
+          "world": "Kronos",
+          "job": "Dawn Warrior"
+        }
+      ]
+    },
+    {
+      "name": "RoyaiOrange",
+      "region": "NA",
+      "color": "#b07d55",
+      "snapshots": [
+        {
+          "date": "2026-07-21",
+          "level": 294,
+          "expCurrent": "77574782210273",
+          "expToNext": "430892639851831",
+          "progress": 18.003,
+          "world": "Kronos",
+          "job": "Night Lord"
+        },
+        {
+          "date": "2026-07-22",
+          "level": 294,
+          "expCurrent": "82654782210273",
+          "expToNext": "430892639851831",
+          "progress": 19.182,
+          "world": "Kronos",
+          "job": "Night Lord"
+        },
+        {
+          "date": "2026-07-23",
+          "level": 294,
+          "expCurrent": "91704782210273",
+          "expToNext": "430892639851831",
+          "progress": 21.282,
+          "world": "Kronos",
+          "job": "Night Lord"
+        },
+        {
+          "date": "2026-07-24",
+          "level": 294,
+          "expCurrent": "98424782210273",
+          "expToNext": "430892639851831",
+          "progress": 22.842,
+          "world": "Kronos",
+          "job": "Night Lord"
+        },
+        {
+          "date": "2026-07-25",
+          "level": 294,
+          "expCurrent": "105014782210273",
+          "expToNext": "430892639851831",
+          "progress": 24.371,
+          "world": "Kronos",
+          "job": "Night Lord"
+        },
+        {
+          "date": "2026-07-26",
+          "level": 294,
+          "expCurrent": "118254782210273",
+          "expToNext": "430892639851831",
+          "progress": 27.444,
+          "world": "Kronos",
+          "job": "Night Lord"
+        },
+        {
+          "date": "2026-07-27",
+          "level": 294,
+          "expCurrent": "127314782210273",
+          "expToNext": "430892639851831",
+          "progress": 29.546,
+          "world": "Kronos",
+          "job": "Night Lord"
+        },
+        {
+          "date": "2026-07-28",
+          "level": 294,
+          "expCurrent": "137194782210273",
+          "expToNext": "430892639851831",
+          "progress": 31.839,
+          "world": "Kronos",
+          "job": "Night Lord"
+        }
+      ]
+    },
+    {
+      "name": "Yugameru",
+      "region": "NA",
+      "color": "#9a7585",
+      "snapshots": [
+        {
+          "date": "2026-07-21",
+          "level": 294,
+          "expCurrent": "30043201653625",
+          "expToNext": "430892639851831",
+          "progress": 6.972,
+          "world": "Kronos",
+          "job": "Kinesis"
+        },
+        {
+          "date": "2026-07-22",
+          "level": 294,
+          "expCurrent": "36273201653625",
+          "expToNext": "430892639851831",
+          "progress": 8.418,
+          "world": "Kronos",
+          "job": "Kinesis"
+        },
+        {
+          "date": "2026-07-23",
+          "level": 294,
+          "expCurrent": "45663201653625",
+          "expToNext": "430892639851831",
+          "progress": 10.597,
+          "world": "Kronos",
+          "job": "Kinesis"
+        },
+        {
+          "date": "2026-07-24",
+          "level": 294,
+          "expCurrent": "45663201653625",
+          "expToNext": "430892639851831",
+          "progress": 10.597,
+          "world": "Kronos",
+          "job": "Kinesis"
+        },
+        {
+          "date": "2026-07-25",
+          "level": 294,
+          "expCurrent": "78973201653625",
+          "expToNext": "430892639851831",
+          "progress": 18.327,
+          "world": "Kronos",
+          "job": "Kinesis"
+        },
+        {
+          "date": "2026-07-26",
+          "level": 294,
+          "expCurrent": "89553201653625",
+          "expToNext": "430892639851831",
+          "progress": 20.783,
+          "world": "Kronos",
+          "job": "Kinesis"
+        },
+        {
+          "date": "2026-07-27",
+          "level": 294,
+          "expCurrent": "98493201653625",
+          "expToNext": "430892639851831",
+          "progress": 22.857,
+          "world": "Kronos",
+          "job": "Kinesis"
+        },
+        {
+          "date": "2026-07-28",
+          "level": 294,
+          "expCurrent": "106823201653625",
+          "expToNext": "430892639851831",
+          "progress": 24.791,
+          "world": "Kronos",
+          "job": "Kinesis"
+        }
+      ]
     }
   ]
 }

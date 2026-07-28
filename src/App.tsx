@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { useState } from "react";
 import history from "./data/history.json";
 import { compareSnapshots, dailyGain, formatExp } from "./format";
 import { ProgressChart } from "./ProgressChart";
@@ -43,103 +44,140 @@ function buildMembers(data: LeaderboardData): LeaderboardMember[] {
   }));
 }
 
-function asciiBar(progress: number) {
-  const width = 16;
-  const position = Math.min(
-    width,
-    Math.max(1, Math.round((Math.min(100, Math.max(0, progress)) / 100) * width)),
-  );
-
-  return `[${"=".repeat(position - 1)}>${".".repeat(width - position)}]`;
-}
+const ASCII_HORSE = ["   __/\\", "~-(o  )>"];
+const ASCII_HORSE_LEGS = ["  /  \\", "  \\  /"];
+const ASCII_TRACK =
+  "----------------------------------------------------------------------------------------------------------------------------------------------------------------";
 
 export function App() {
+  const [honseMode, setHonseMode] = useState(false);
   const data = history as LeaderboardData;
   const members = buildMembers(data);
 
   return (
-    <main>
+    <main className={honseMode ? "honse-mode" : undefined}>
+      <button
+        aria-pressed={honseMode}
+        className="honse-toggle"
+        onClick={() => setHonseMode((enabled) => !enabled)}
+        type="button"
+      >
+        honse mode
+      </button>
       <div className="board-shell">
-        <div className="leaderboard-grid">
-          <div className="rank-list">
-            <div aria-hidden="true" className="rank-header">
-              <span>rank</span>
-              <span>character</span>
-              <span>move</span>
-              <span style={{ textAlign: "right" }}>level / exp</span>
-            </div>
-            {members.map((member, index) => (
-              <div className="rank-row" key={member.name}>
-                <span className="rank-number">{index + 1}</span>
-                <div className="character">
-                  <span>
-                    <strong>{member.name}</strong>
-                    <small>
-                      {member.current.job} · {member.current.world}
-                    </small>
-                  </span>
-                </div>
-                <span
-                  className={`movement ${
-                    !member.movement
-                      ? "same"
+        {!honseMode && (
+          <div className="leaderboard-grid">
+            <div className="rank-list">
+              <div aria-hidden="true" className="rank-header">
+                <span>rank</span>
+                <span>character</span>
+                <span>move</span>
+                <span style={{ textAlign: "right" }}>level / exp</span>
+              </div>
+              {members.map((member, index) => (
+                <div className="rank-row" key={member.name}>
+                  <span className="rank-number">{index + 1}</span>
+                  <div className="character">
+                    <span>
+                      <strong>{member.name}</strong>
+                      <small>
+                        {member.current.job} · {member.current.world}
+                      </small>
+                    </span>
+                  </div>
+                  <span
+                    className={`movement ${
+                      !member.movement
+                        ? "same"
+                        : member.movement > 0
+                          ? "up"
+                          : "down"
+                    }`}
+                  >
+                    {!member.movement
+                      ? "—"
                       : member.movement > 0
-                        ? "up"
-                        : "down"
-                  }`}
-                >
-                  {!member.movement
-                    ? "—"
-                    : member.movement > 0
-                      ? `↑ ${member.movement}`
-                      : `↓ ${Math.abs(member.movement)}`}
-                </span>
-                <div
-                  className="gain-cell"
-                  style={
-                    { "--member-color": member.color } as CSSProperties
-                  }
-                >
-                  <strong>
-                    lv. {member.current.level} ·{" "}
-                    {member.current.progress.toFixed(1)}%
-                  </strong>
-                  <small>
-                    {member.dailyGain !== null
-                      ? `+${formatExp(member.dailyGain)} yesterday`
-                      : "no prior-day snapshot"}
-                  </small>
-                  <div className="progress-track">
-                    <span
-                      style={{
-                        width: `${Math.max(1, member.current.progress)}%`,
-                      }}
-                    />
+                        ? `↑ ${member.movement}`
+                        : `↓ ${Math.abs(member.movement)}`}
+                  </span>
+                  <div
+                    className="gain-cell"
+                    style={
+                      { "--member-color": member.color } as CSSProperties
+                    }
+                  >
+                    <strong>
+                      lv. {member.current.level} ·{" "}
+                      {member.current.progress.toFixed(1)}%
+                    </strong>
+                    <small>
+                      {member.dailyGain !== null
+                        ? `+${formatExp(member.dailyGain)} yesterday`
+                        : "no prior-day snapshot"}
+                    </small>
+                    <div className="progress-track">
+                      <span
+                        style={{
+                          width: `${Math.max(1, member.current.progress)}%`,
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+
+            <div className="chart-panel">
+              <ProgressChart members={members} />
+            </div>
+          </div>
+        )}
+
+        <section aria-label="ascii horse race" className="ascii-progress-strip">
+          <div className="ascii-race">
+            <div aria-hidden="true" className="ascii-axis">
+              <span />
+              <span>
+                <i>0%</i>
+                <i>100%</i>
+              </span>
+              <span />
+            </div>
+            {members.map((member, index) => (
+              <div
+                className="ascii-lane"
+                key={member.name}
+                style={
+                  {
+                    "--member-color": member.color,
+                    "--horse-delay": `${index * -70}ms`,
+                    "--progress": `${member.current.progress}%`,
+                  } as CSSProperties
+                }
+              >
+                <strong>{member.name}</strong>
+                <code className="ascii-track">
+                  <span aria-hidden="true">{ASCII_TRACK}</span>
+                  <b
+                    aria-label={`${member.name} at ${member.current.progress.toFixed(1)} percent`}
+                    className="ascii-horse"
+                  >
+                    {ASCII_HORSE.map((line) => (
+                      <span key={line}>{line}</span>
+                    ))}
+                    <span aria-hidden="true" className="ascii-horse-legs">
+                      {ASCII_HORSE_LEGS.map((legs, frame) => (
+                        <i className={`ascii-leg-frame frame-${frame}`} key={legs}>
+                          {legs}
+                        </i>
+                      ))}
+                    </span>
+                  </b>
+                </code>
+                <span>{member.current.progress.toFixed(1)}%</span>
               </div>
             ))}
           </div>
-
-          <div className="chart-panel">
-            <ProgressChart members={members} />
-          </div>
-        </div>
-
-        <section aria-label="ascii progress" className="ascii-progress-strip">
-          {members.map((member) => (
-            <div
-              className="ascii-progress"
-              key={member.name}
-              style={{ "--member-color": member.color } as CSSProperties}
-            >
-              <span className="ascii-progress-label">
-                <strong>{member.name}</strong>
-                <span>{member.current.progress.toFixed(1)}%</span>
-              </span>
-              <code>{asciiBar(member.current.progress)}</code>
-            </div>
-          ))}
         </section>
       </div>
     </main>
