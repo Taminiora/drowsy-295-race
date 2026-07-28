@@ -634,6 +634,76 @@
           "job": "Kinesis"
         }
       ]
+    },
+    {
+      "name": "Voln",
+      "region": "NA",
+      "color": "#5673a6",
+      "snapshots": [
+        {
+          "date": "2026-07-22",
+          "level": 294,
+          "expCurrent": "156844920906066",
+          "expToNext": "430892639851831",
+          "progress": 36.4,
+          "world": "Kronos",
+          "job": "Bishop"
+        },
+        {
+          "date": "2026-07-23",
+          "level": 294,
+          "expCurrent": "166324558982806",
+          "expToNext": "430892639851831",
+          "progress": 38.6,
+          "world": "Kronos",
+          "job": "Bishop"
+        },
+        {
+          "date": "2026-07-24",
+          "level": 294,
+          "expCurrent": "177958660258806",
+          "expToNext": "430892639851831",
+          "progress": 41.3,
+          "world": "Kronos",
+          "job": "Bishop"
+        },
+        {
+          "date": "2026-07-25",
+          "level": 294,
+          "expCurrent": "193039902653620",
+          "expToNext": "430892639851831",
+          "progress": 44.8,
+          "world": "Kronos",
+          "job": "Bishop"
+        },
+        {
+          "date": "2026-07-26",
+          "level": 294,
+          "expCurrent": "214584534646211",
+          "expToNext": "430892639851831",
+          "progress": 49.8,
+          "world": "Kronos",
+          "job": "Bishop"
+        },
+        {
+          "date": "2026-07-27",
+          "level": 294,
+          "expCurrent": "221909709523692",
+          "expToNext": "430892639851831",
+          "progress": 51.5,
+          "world": "Kronos",
+          "job": "Bishop"
+        },
+        {
+          "date": "2026-07-28",
+          "level": 294,
+          "expCurrent": "227261512908920",
+          "expToNext": "430892639851831",
+          "progress": 52.742,
+          "world": "Kronos",
+          "job": "Bishop"
+        }
+      ]
     }
   ]
 }

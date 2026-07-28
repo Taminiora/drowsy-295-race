@@ -120,6 +120,7 @@ test("the built site is a static Drowsy leaderboard", async () => {
       "xZenjiro",
       "RoyaiOrange",
       "Yugameru",
+      "Voln",
     ],
   );
 
@@ -152,6 +153,17 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.equal(yugameru.color, "#9a7585");
   assert.equal(yugameru.snapshots[2].progress, 10.597);
   assert.equal(yugameru.snapshots[3].progress, 10.597);
+
+  const voln = parsed.characters.find(
+    (character) => character.name === "Voln",
+  );
+  assert.equal(voln.color, "#5673a6");
+  assert.equal(voln.snapshots.length, 7);
+  assert.deepEqual(
+    voln.snapshots.map((snapshot) => snapshot.progress),
+    [36.4, 38.6, 41.3, 44.8, 49.8, 51.5, 52.742],
+  );
+  assert.equal(voln.snapshots.at(-1).expCurrent, "227261512908920");
 });
 
 test("finished characters keep their race placement", () => {
@@ -270,6 +282,7 @@ test("the updater is slow and the Pages workflow is configured", async () => {
     /nexon\.com\/maplestory\/rankings\/overall-ranking\/legendary/,
   );
   assert.match(roster, /tamitamitami/);
+  assert.match(roster, /Voln/);
   assert.match(workflow, /cron: "0 19 \* \* \*"/);
   assert.match(workflow, /cron: "0 20 \* \* \*"/);
   assert.match(workflow, /TZ=America\/Los_Angeles date \+%H/);
