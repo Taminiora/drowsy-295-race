@@ -269,6 +269,7 @@ export function ProgressChart({
           aria-label="seven day character progress through level 294"
           onPointerLeave={() => setActivePoint(null)}
           onPointerMove={handleChartPointerMove}
+          preserveAspectRatio="xMinYMid meet"
           role="img"
           viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         >

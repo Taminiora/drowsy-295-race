@@ -41,6 +41,7 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.doesNotMatch(chart, /trendline controls/);
   assert.doesNotMatch(chart, /chart-trend-line/);
   assert.match(chart, /clipPath="url\(#plot-clip\)"/);
+  assert.match(chart, /preserveAspectRatio="xMinYMid meet"/);
   assert.match(chart, /x1=\{x\(0\)\}/);
   assert.match(chart, /y1=\{y\(latestValue - dailyPace \* currentDay\)\}/);
   assert.match(chart, /className="chart-projection-hit"/);
@@ -63,6 +64,11 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(styles, /height: 630px/);
   assert.match(styles, /width: 1200px/);
   assert.match(styles, /\.honse-toggle\[aria-pressed="true"\]/);
+  assert.match(styles, /@media \(min-width: 1200px\)/);
+  assert.match(
+    styles,
+    /grid-template-columns: minmax\(420px, 0\.58fr\) minmax\(0, 1\.42fr\)/,
+  );
   assert.match(styles, /@keyframes horse-step-a/);
   assert.match(styles, /@keyframes horse-step-b/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);

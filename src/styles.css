@@ -535,6 +535,17 @@ main {
   animation-name: horse-step-b;
 }
 
+@media (min-width: 1200px) {
+  .leaderboard-grid {
+    column-gap: 8px;
+    grid-template-columns: minmax(420px, 0.58fr) minmax(0, 1.42fr);
+  }
+
+  .chart-panel {
+    padding-left: 0;
+  }
+}
+
 @keyframes horse-step-a {
   0%,
   49.9% {
