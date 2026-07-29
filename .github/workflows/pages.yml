@@ -4,10 +4,10 @@ on:
   push:
     branches: [main]
   schedule:
-    # GitHub cron uses UTC. Run at both possible noon-Pacific UTC hours, then
-    # let the first step keep only the one that is noon in Los Angeles.
+    # GitHub cron uses UTC. Run at both possible 11am-Pacific UTC hours, then
+    # let the first step keep only the one that is 11am in Los Angeles.
+    - cron: "0 18 * * *"
     - cron: "0 19 * * *"
-    - cron: "0 20 * * *"
   workflow_dispatch:
 
 permissions:
@@ -25,10 +25,10 @@ jobs:
     outputs:
       should_run: ${{ steps.schedule.outputs.should_run }}
     steps:
-      - name: Check noon Pacific schedule
+      - name: Check 11am Pacific schedule
         id: schedule
         run: |
-          if [[ "$GITHUB_EVENT_NAME" != "schedule" || "$(TZ=America/Los_Angeles date +%H)" == "12" ]]; then
+          if [[ "$GITHUB_EVENT_NAME" != "schedule" || "$(TZ=America/Los_Angeles date +%H)" == "11" ]]; then
             echo "should_run=true" >> "$GITHUB_OUTPUT"
           else
             echo "should_run=false" >> "$GITHUB_OUTPUT"

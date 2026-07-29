@@ -108,6 +108,11 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(html, /name="twitter:card" content="summary_large_image"/);
   assert.equal(shareImage, undefined);
   const parsed = JSON.parse(data);
+  const snapshotOn = (character, date) => {
+    const snapshot = character.snapshots.find((entry) => entry.date === date);
+    assert.ok(snapshot, `${character.name} is missing its ${date} snapshot`);
+    return snapshot;
+  };
   assert.equal(parsed.title, "drowsy 295 race");
   assert.deepEqual(
     parsed.characters.map((character) => character.name),
@@ -127,11 +132,10 @@ test("the built site is a static Drowsy leaderboard", async () => {
   const pack = parsed.characters.find(
     (character) => character.name === "Pãck",
   );
-  assert.equal(pack.snapshots.length, 8);
-  assert.equal(pack.snapshots[4].progress, 95.981);
-  assert.equal(pack.snapshots[4].level, 293);
-  assert.equal(pack.snapshots[5].level, 294);
-  assert.equal(pack.snapshots.at(-1).progress, 5.049);
+  assert.equal(snapshotOn(pack, "2026-07-25").progress, 95.981);
+  assert.equal(snapshotOn(pack, "2026-07-25").level, 293);
+  assert.equal(snapshotOn(pack, "2026-07-26").level, 294);
+  assert.equal(snapshotOn(pack, "2026-07-28").progress, 5.049);
 
   const seededPriorDay = new Map([
     ["xZenjiro", [38.744, 55.059]],
@@ -140,30 +144,43 @@ test("the built site is a static Drowsy leaderboard", async () => {
   ]);
   for (const [name, [firstProgress, priorDayProgress]] of seededPriorDay) {
     const character = parsed.characters.find((entry) => entry.name === name);
-    assert.equal(character.snapshots.length, 8);
-    assert.equal(character.snapshots[0].date, "2026-07-21");
-    assert.equal(character.snapshots[0].progress, firstProgress);
-    assert.equal(character.snapshots[6].date, "2026-07-27");
-    assert.equal(character.snapshots[6].progress, priorDayProgress);
+    assert.equal(
+      snapshotOn(character, "2026-07-21").progress,
+      firstProgress,
+    );
+    assert.equal(
+      snapshotOn(character, "2026-07-27").progress,
+      priorDayProgress,
+    );
   }
 
   const yugameru = parsed.characters.find(
     (character) => character.name === "Yugameru",
   );
   assert.equal(yugameru.color, "#9a7585");
-  assert.equal(yugameru.snapshots[2].progress, 10.597);
-  assert.equal(yugameru.snapshots[3].progress, 10.597);
+  assert.equal(snapshotOn(yugameru, "2026-07-23").progress, 10.597);
+  assert.equal(snapshotOn(yugameru, "2026-07-24").progress, 10.597);
 
   const voln = parsed.characters.find(
     (character) => character.name === "Voln",
   );
   assert.equal(voln.color, "#5673a6");
-  assert.equal(voln.snapshots.length, 7);
   assert.deepEqual(
-    voln.snapshots.map((snapshot) => snapshot.progress),
+    [
+      "2026-07-22",
+      "2026-07-23",
+      "2026-07-24",
+      "2026-07-25",
+      "2026-07-26",
+      "2026-07-27",
+      "2026-07-28",
+    ].map((date) => snapshotOn(voln, date).progress),
     [36.4, 38.6, 41.3, 44.8, 49.8, 51.5, 52.742],
   );
-  assert.equal(voln.snapshots.at(-1).expCurrent, "227261512908920");
+  assert.equal(
+    snapshotOn(voln, "2026-07-28").expCurrent,
+    "227261512908920",
+  );
 });
 
 test("finished characters keep their race placement", () => {
@@ -283,8 +300,9 @@ test("the updater is slow and the Pages workflow is configured", async () => {
   );
   assert.match(roster, /tamitamitami/);
   assert.match(roster, /Voln/);
+  assert.match(workflow, /cron: "0 18 \* \* \*"/);
   assert.match(workflow, /cron: "0 19 \* \* \*"/);
-  assert.match(workflow, /cron: "0 20 \* \* \*"/);
   assert.match(workflow, /TZ=America\/Los_Angeles date \+%H/);
+  assert.match(workflow, /== "11"/);
   assert.match(workflow, /actions\/deploy-pages@v4/);
 });
