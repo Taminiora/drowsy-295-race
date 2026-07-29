@@ -1,7 +1,7 @@
 {
   "title": "drowsy 295 race",
   "description": "road to level 295.",
-  "updatedOn": "2026-07-28",
+  "updatedOn": "2026-07-29",
   "characters": [
     {
       "name": "karinay",
@@ -77,6 +77,15 @@
           "expCurrent": "71077590836117",
           "expToNext": "430892639851831",
           "progress": 16.495,
+          "world": "Kronos",
+          "job": "Adele"
+        },
+        {
+          "date": "2026-07-29",
+          "level": 294,
+          "expCurrent": "81278313177487",
+          "expToNext": "430892639851831",
+          "progress": 18.862,
           "world": "Kronos",
           "job": "Adele"
         }
@@ -158,6 +167,15 @@
           "progress": 43.745,
           "world": "Kronos",
           "job": "Wind Archer"
+        },
+        {
+          "date": "2026-07-29",
+          "level": 294,
+          "expCurrent": "208786086138544",
+          "expToNext": "430892639851831",
+          "progress": 48.454,
+          "world": "Kronos",
+          "job": "Wind Archer"
         }
       ]
     },
@@ -235,6 +253,15 @@
           "expCurrent": "85713072018318",
           "expToNext": "430892639851831",
           "progress": 19.891,
+          "world": "Kronos",
+          "job": "Arch Mage (F/P)"
+        },
+        {
+          "date": "2026-07-29",
+          "level": 294,
+          "expCurrent": "94008115977079",
+          "expToNext": "430892639851831",
+          "progress": 21.817,
           "world": "Kronos",
           "job": "Arch Mage (F/P)"
         }
@@ -316,6 +343,15 @@
           "progress": 58.635,
           "world": "Kronos",
           "job": "Buccaneer"
+        },
+        {
+          "date": "2026-07-29",
+          "level": 294,
+          "expCurrent": "265093534228297",
+          "expToNext": "430892639851831",
+          "progress": 61.521,
+          "world": "Kronos",
+          "job": "Buccaneer"
         }
       ]
     },
@@ -393,6 +429,15 @@
           "expCurrent": "21759165758994",
           "expToNext": "430892639851831",
           "progress": 5.049,
+          "world": "Kronos",
+          "job": "Aran"
+        },
+        {
+          "date": "2026-07-29",
+          "level": 294,
+          "expCurrent": "30344831346134",
+          "expToNext": "430892639851831",
+          "progress": 7.042,
           "world": "Kronos",
           "job": "Aran"
         }
@@ -474,6 +519,15 @@
           "progress": 58.371,
           "world": "Kronos",
           "job": "Dawn Warrior"
+        },
+        {
+          "date": "2026-07-29",
+          "level": 294,
+          "expCurrent": "267875846566282",
+          "expToNext": "430892639851831",
+          "progress": 62.167,
+          "world": "Kronos",
+          "job": "Dawn Warrior"
         }
       ]
     },
@@ -551,6 +605,15 @@
           "expCurrent": "137194782210273",
           "expToNext": "430892639851831",
           "progress": 31.839,
+          "world": "Kronos",
+          "job": "Night Lord"
+        },
+        {
+          "date": "2026-07-29",
+          "level": 294,
+          "expCurrent": "148195743678874",
+          "expToNext": "430892639851831",
+          "progress": 34.392,
           "world": "Kronos",
           "job": "Night Lord"
         }
@@ -632,6 +695,15 @@
           "progress": 24.791,
           "world": "Kronos",
           "job": "Kinesis"
+        },
+        {
+          "date": "2026-07-29",
+          "level": 294,
+          "expCurrent": "122249108956642",
+          "expToNext": "430892639851831",
+          "progress": 28.371,
+          "world": "Kronos",
+          "job": "Kinesis"
         }
       ]
     },
@@ -700,6 +772,15 @@
           "expCurrent": "227261512908920",
           "expToNext": "430892639851831",
           "progress": 52.742,
+          "world": "Kronos",
+          "job": "Bishop"
+        },
+        {
+          "date": "2026-07-29",
+          "level": 294,
+          "expCurrent": "240094142382311",
+          "expToNext": "430892639851831",
+          "progress": 55.72,
           "world": "Kronos",
           "job": "Bishop"
         }
