@@ -88,7 +88,7 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(styles, /@keyframes horse-step-b/);
   assert.match(
     styles,
-    /animation-duration: var\(--horse-step-duration, 620ms\)/,
+    /animation-duration: var\(--horse-step-duration, 660ms\)/,
   );
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(html, /<div id="root"><\/div>/);
@@ -245,11 +245,11 @@ test("horse leg speed scales with the latest daily gain", () => {
     highestGain,
   );
 
-  assert.equal(lowSpeed, 380);
+  assert.equal(lowSpeed, 340);
   assert.equal(middleSpeed, 500);
-  assert.equal(highSpeed, 620);
-  assert.equal(horseStepDuration(lowSpeed), 620);
-  assert.equal(horseStepDuration(highSpeed), 380);
+  assert.equal(highSpeed, 660);
+  assert.equal(horseStepDuration(lowSpeed), 660);
+  assert.equal(horseStepDuration(highSpeed), 340);
 });
 
 test("the project has no server or database runtime", async () => {

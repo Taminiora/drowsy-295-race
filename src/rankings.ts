@@ -1,8 +1,8 @@
 import type { CharacterHistory, Snapshot } from "./types";
 
 export const FINISH_LEVEL = 295;
-const FAST_HORSE_SPEED = 620;
-const SLOW_HORSE_SPEED = 380;
+const FAST_HORSE_SPEED = 660;
+const SLOW_HORSE_SPEED = 340;
 const HORSE_STEP_TIME_BUDGET_MS = 1_000;
 
 export function compareSnapshots(left: Snapshot, right: Snapshot) {

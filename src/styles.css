@@ -525,7 +525,7 @@ main {
 }
 
 .ascii-leg-frame {
-  animation-duration: var(--horse-step-duration, 620ms);
+  animation-duration: var(--horse-step-duration, 660ms);
   animation-iteration-count: infinite;
   animation-timing-function: steps(1, end);
   font-style: normal;
