@@ -300,8 +300,8 @@ test("the updater is slow and the Pages workflow is configured", async () => {
   );
   assert.match(roster, /tamitamitami/);
   assert.match(roster, /Voln/);
-  assert.match(workflow, /cron: "0 18 \* \* \*"/);
-  assert.match(workflow, /cron: "0 19 \* \* \*"/);
+  assert.match(workflow, /cron: "10 18 \* \* \*"/);
+  assert.match(workflow, /cron: "10 19 \* \* \*"/);
   assert.match(workflow, /TZ=America\/Los_Angeles date \+%H/);
   assert.match(workflow, /== "11"/);
   assert.match(workflow, /actions\/deploy-pages@v4/);

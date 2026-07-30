@@ -4,10 +4,10 @@ on:
   push:
     branches: [main]
   schedule:
-    # GitHub cron uses UTC. Run at both possible 11am-Pacific UTC hours, then
-    # let the first step keep only the one that is 11am in Los Angeles.
-    - cron: "0 18 * * *"
-    - cron: "0 19 * * *"
+    # GitHub cron uses UTC. Run at both possible 11:10am-Pacific UTC hours,
+    # then let the first step keep only the one in the 11am Los Angeles hour.
+    - cron: "10 18 * * *"
+    - cron: "10 19 * * *"
   workflow_dispatch:
 
 permissions:
