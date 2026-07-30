@@ -142,7 +142,8 @@ main {
 }
 
 .embed-mode .ascii-horse {
-  left: clamp(0px, var(--progress), calc(100% - 70px));
+  --horse-width: 70px;
+
   line-height: 12px;
   top: 8px;
 }
@@ -492,6 +493,7 @@ main {
   color: var(--line);
   font-family: var(--font-mono);
   font-size: 9px;
+  height: 100%;
   line-height: 26px;
   overflow: hidden;
   position: relative;
@@ -499,19 +501,38 @@ main {
 }
 
 .ascii-track > span {
-  letter-spacing: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--line) 0 4px,
+    transparent 4px 7px
+  );
+  display: block;
+  font-size: 0;
+  height: 1px;
+  inset-inline: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .ascii-horse {
+  --horse-width: 48px;
+
   background: var(--background);
   color: var(--member-color);
   display: grid;
   font-weight: 600;
-  left: clamp(0px, var(--progress), calc(100% - 48px));
+  left: clamp(
+    0px,
+    calc(var(--progress) - var(--horse-width)),
+    calc(100% - var(--horse-width))
+  );
   line-height: 8px;
   padding-inline: 2px;
   position: absolute;
   top: 1px;
+  width: var(--horse-width);
 }
 
 .ascii-horse > span {

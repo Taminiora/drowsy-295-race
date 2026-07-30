@@ -75,6 +75,14 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(styles, /\.progress-chart \{\s+flex: 1;\s+min-height: 0;/);
   assert.match(styles, /\.rank-list \{\s+align-self: center;/);
   assert.match(styles, /\.honse-mode \.ascii-progress-strip/);
+  assert.match(styles, /\.ascii-track \{[\s\S]*height: 100%/);
+  assert.match(styles, /\.ascii-track > span \{[\s\S]*repeating-linear-gradient/);
+  assert.match(styles, /\.ascii-track > span \{[\s\S]*inset-inline: 0/);
+  assert.match(styles, /--horse-width: 48px/);
+  assert.match(
+    styles,
+    /calc\(var\(--progress\) - var\(--horse-width\)\)/,
+  );
   assert.match(styles, /\.embed-mode \{/);
   assert.match(styles, /height: 630px/);
   assert.match(styles, /width: 1200px/);
