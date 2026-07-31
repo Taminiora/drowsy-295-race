@@ -58,6 +58,10 @@ const ASCII_HORSE_LEGS = ["  /  \\", "  \\  /"];
 const ASCII_TRACK =
   "----------------------------------------------------------------------------------------------------------------------------------------------------------------";
 
+function mapleRanksUrl(name: string) {
+  return `https://mapleranks.com/u/${encodeURIComponent(name)}`;
+}
+
 export function App() {
   const embedMode = new URLSearchParams(window.location.search).has("embed");
   const [honseMode, setHonseMode] = useState(embedMode);
@@ -121,12 +125,17 @@ export function App() {
                     ) : null}
                   </span>
                   <div className="character">
-                    <span>
+                    <a
+                      className="character-link"
+                      href={mapleRanksUrl(member.name)}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
                       <strong>{member.name}</strong>
                       <small>
                         {member.current.job} · {member.current.world}
                       </small>
-                    </span>
+                    </a>
                   </div>
                   <span
                     className={`movement ${
@@ -206,7 +215,14 @@ export function App() {
                     } as CSSProperties
                   }
                 >
-                  <strong>{member.name}</strong>
+                  <a
+                    className="ascii-name-link"
+                    href={mapleRanksUrl(member.name)}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    {member.name}
+                  </a>
                   <code className="ascii-track">
                     <span aria-hidden="true">{ASCII_TRACK}</span>
                     <b

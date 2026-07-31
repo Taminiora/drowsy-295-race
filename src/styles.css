@@ -132,7 +132,7 @@ main {
   height: 52px;
 }
 
-.embed-mode .ascii-lane > strong {
+.embed-mode .ascii-name-link {
   font-size: 13px;
 }
 
@@ -215,6 +215,14 @@ main {
   min-width: 0;
 }
 
+.character-link {
+  color: inherit;
+  display: block;
+  min-width: 0;
+  text-decoration: none;
+  width: 100%;
+}
+
 .character strong,
 .character small {
   display: block;
@@ -226,6 +234,20 @@ main {
 .character strong {
   color: var(--text);
   font-size: 13px;
+}
+
+.character-link:hover strong,
+.character-link:focus-visible strong,
+.ascii-name-link:hover,
+.ascii-name-link:focus-visible {
+  color: var(--heading);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.character-link:focus-visible,
+.ascii-name-link:focus-visible {
+  outline: none;
 }
 
 .character small {
@@ -477,10 +499,12 @@ main {
   height: 26px;
 }
 
-.ascii-lane > strong {
+.ascii-name-link {
+  color: inherit;
   font-size: 9px;
   font-weight: 600;
   overflow: hidden;
+  text-decoration: none;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

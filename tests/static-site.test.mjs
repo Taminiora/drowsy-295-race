@@ -22,6 +22,11 @@ test("the built site is a static Drowsy leaderboard", async () => {
 
   assert.doesNotMatch(app, /7-day progress/);
   assert.match(app, /aria-label="ascii horse race"/);
+  assert.match(app, /https:\/\/mapleranks\.com\/u\//);
+  assert.match(app, /encodeURIComponent\(name\)/);
+  assert.match(app, /className="character-link"/);
+  assert.match(app, /className="ascii-name-link"/);
+  assert.match(app, /target="_blank"/);
   assert.match(app, /ASCII_HORSE/);
   assert.match(app, /ASCII_HORSE_LEGS/);
   assert.match(app, /ASCII_TRACK/);
