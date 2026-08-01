@@ -5,7 +5,8 @@ on:
     branches: [main]
   schedule:
     # GitHub cron uses UTC. Run at both possible 11:10am-Pacific UTC hours,
-    # then let the first step keep only the one in the 11am Los Angeles hour.
+    # then keep the first run delivered each Pacific day. GitHub may deliver
+    # scheduled runs late, so do not reject them based on the current hour.
     - cron: "10 18 * * *"
     - cron: "10 19 * * *"
   workflow_dispatch:
@@ -25,18 +26,26 @@ jobs:
     outputs:
       should_run: ${{ steps.schedule.outputs.should_run }}
     steps:
-      - name: Check 11am Pacific schedule
-        id: schedule
-        run: |
-          if [[ "$GITHUB_EVENT_NAME" != "schedule" || "$(TZ=America/Los_Angeles date +%H)" == "11" ]]; then
-            echo "should_run=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "should_run=false" >> "$GITHUB_OUTPUT"
-          fi
       - uses: actions/checkout@v6
-        if: steps.schedule.outputs.should_run == 'true'
         with:
           ref: ${{ github.event.repository.default_branch }}
+      - name: Check whether today's update is needed
+        id: schedule
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" != "schedule" ]]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          today="$(TZ=America/Los_Angeles date +%F)"
+          updated_on="$(jq -r '.updatedOn' src/data/history.json)"
+          if [[ "$updated_on" == "$today" ]]; then
+            echo "Rankings are already current for $today."
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Rankings need an update for $today."
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-node@v6
         if: steps.schedule.outputs.should_run == 'true'
         with:

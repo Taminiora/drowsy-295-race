@@ -80,9 +80,18 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(styles, /\.progress-chart \{\s+flex: 1;\s+min-height: 0;/);
   assert.match(styles, /\.rank-list \{\s+align-self: center;/);
   assert.match(styles, /\.honse-mode \.ascii-progress-strip/);
+  assert.match(
+    styles,
+    /\.honse-mode \.ascii-progress-strip \{[\s\S]*align-items: safe center/,
+  );
+  assert.match(
+    styles,
+    /\.honse-mode \.ascii-progress-strip \{[\s\S]*overflow-y: auto/,
+  );
   assert.match(styles, /\.ascii-track \{[\s\S]*height: 100%/);
   assert.match(styles, /\.ascii-track > span \{[\s\S]*repeating-linear-gradient/);
   assert.match(styles, /\.ascii-track > span \{[\s\S]*inset-inline: 0/);
+  assert.match(styles, /\.ascii-track > span \{[\s\S]*height: 2px/);
   assert.match(styles, /--horse-width: 48px/);
   assert.match(
     styles,
@@ -315,7 +324,8 @@ test("the updater is slow and the Pages workflow is configured", async () => {
   assert.match(roster, /Voln/);
   assert.match(workflow, /cron: "10 18 \* \* \*"/);
   assert.match(workflow, /cron: "10 19 \* \* \*"/);
-  assert.match(workflow, /TZ=America\/Los_Angeles date \+%H/);
-  assert.match(workflow, /== "11"/);
+  assert.match(workflow, /TZ=America\/Los_Angeles date \+%F/);
+  assert.match(workflow, /jq -r '\.updatedOn' src\/data\/history\.json/);
+  assert.doesNotMatch(workflow, /date \+%H/);
   assert.match(workflow, /actions\/deploy-pages@v4/);
 });

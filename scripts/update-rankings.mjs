@@ -37,6 +37,19 @@ const EXP_TO_NEXT = {
 const wait = (milliseconds) =>
   new Promise((resolve) => setTimeout(resolve, milliseconds));
 
+function pacificDate(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+  const values = Object.fromEntries(
+    parts.map(({ type, value }) => [type, value]),
+  );
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
 function progressPercent(expCurrent, expToNext) {
   if (expToNext === "0") return 100;
   const thousandths = (BigInt(expCurrent) * 100_000n) / BigInt(expToNext);
@@ -104,7 +117,7 @@ const data = JSON.parse(await readFile(HISTORY_PATH, "utf8"));
 const histories = new Map(
   data.characters.map((character) => [character.name.toLowerCase(), character]),
 );
-const date = new Date().toISOString().slice(0, 10);
+const date = pacificDate();
 const freshSnapshots = new Map();
 let previousRequestStartedAt = 0;
 

@@ -86,10 +86,11 @@ main {
 }
 
 .honse-mode .ascii-progress-strip {
-  align-items: center;
+  align-items: safe center;
   border-top: 0;
   display: flex;
   flex: 1;
+  overflow-y: auto;
   padding-inline: 8px;
 }
 
@@ -532,7 +533,7 @@ main {
   );
   display: block;
   font-size: 0;
-  height: 1px;
+  height: 2px;
   inset-inline: 0;
   overflow: hidden;
   position: absolute;
