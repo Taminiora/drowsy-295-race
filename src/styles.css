@@ -119,8 +119,11 @@ main {
 
 .embed-mode .ascii-axis,
 .embed-mode .ascii-lane {
-  gap: 16px;
-  grid-template-columns: 140px minmax(0, 1fr) 70px;
+  --lane-gap: 16px;
+  --percent-column-width: 70px;
+
+  gap: var(--lane-gap);
+  grid-template-columns: 140px minmax(0, 1fr) var(--percent-column-width);
 }
 
 .embed-mode .ascii-axis {
@@ -206,8 +209,9 @@ main {
 
 .rank-crown {
   color: var(--heading);
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1;
+  transform: translateY(-1px);
 }
 
 .character {
@@ -473,10 +477,13 @@ main {
 
 .ascii-axis,
 .ascii-lane {
+  --lane-gap: 8px;
+  --percent-column-width: 42px;
+
   align-items: center;
   display: grid;
-  gap: 8px;
-  grid-template-columns: 92px minmax(0, 1fr) 42px;
+  gap: var(--lane-gap);
+  grid-template-columns: 92px minmax(0, 1fr) var(--percent-column-width);
 }
 
 .ascii-axis {
@@ -525,6 +532,17 @@ main {
   white-space: nowrap;
 }
 
+.ascii-track::after {
+  border-right: 1px solid var(--heading);
+  content: "";
+  height: 70%;
+  opacity: 0.5;
+  position: absolute;
+  right: 1px;
+  top: 15%;
+  z-index: 2;
+}
+
 .ascii-track > span {
   background: repeating-linear-gradient(
     to right,
@@ -558,6 +576,7 @@ main {
   position: absolute;
   top: 1px;
   width: var(--horse-width);
+  z-index: 1;
 }
 
 .ascii-horse > span {
@@ -568,6 +587,51 @@ main {
 
 .ascii-horse-legs {
   position: relative;
+}
+
+.ascii-horse-crown {
+  color: var(--heading);
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  height: auto;
+  left: 72%;
+  line-height: 1;
+  position: absolute;
+  right: auto;
+  text-shadow: 0 0 4px var(--background);
+  top: -0.4em;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.ascii-lane.finished .ascii-track {
+  overflow: visible;
+}
+
+.ascii-lane.finished .ascii-track::after {
+  opacity: 1;
+}
+
+.ascii-lane.finished .ascii-horse {
+  left: calc(
+    100% + var(--lane-gap) + var(--percent-column-width) -
+      7ch - 2px
+  );
+}
+
+.ascii-lane.finished > span:last-child {
+  visibility: hidden;
+}
+
+.ascii-lane.finished .ascii-leg-frame {
+  animation: none;
+}
+
+.ascii-lane.finished .ascii-leg-frame.frame-0 {
+  opacity: 1;
+}
+
+.ascii-lane.finished .ascii-leg-frame.frame-1 {
+  opacity: 0;
 }
 
 .ascii-leg-frame {

@@ -11,6 +11,7 @@ const PAD_BOTTOM = 20;
 const TARGET_LEVEL = 294;
 const END_LABEL_GAP = 14;
 const TOOLTIP_WIDTH = 164;
+const CHART_START_DATE = "2026-07-27";
 
 function progressIntoTargetLevel(level: number, progress: number) {
   return Math.min(100, Math.max(0, (level - TARGET_LEVEL) * 100 + progress));
@@ -107,7 +108,12 @@ export function ProgressChart({
   }, []);
 
   const chartMembers = members
-    .map((member) => ({ ...member, snapshots: member.snapshots.slice(-7) }))
+    .map((member) => ({
+      ...member,
+      snapshots: member.snapshots.filter(
+        (snapshot) => snapshot.date >= CHART_START_DATE,
+      ),
+    }))
     .filter((member) => member.snapshots.length > 1);
   const maxPoints = Math.max(
     0,
@@ -290,7 +296,7 @@ export function ProgressChart({
       </div>
       <div className="progress-chart" ref={chartRef}>
         <svg
-          aria-label="seven day character progress through level 294"
+          aria-label="character progress through level 294 since july 27"
           onPointerLeave={() => setActivePoint(null)}
           onPointerMove={handleChartPointerMove}
           preserveAspectRatio="xMinYMid meet"
@@ -439,7 +445,9 @@ export function ProgressChart({
                   const pointX = x(index);
                   const pointY = y(value);
                   const valueLabel =
-                    snapshot.level === TARGET_LEVEL
+                    snapshot.level > TARGET_LEVEL
+                      ? `lv. ${snapshot.level}`
+                      : snapshot.level === TARGET_LEVEL
                       ? `${value.toFixed(1)}%`
                       : `lv. ${snapshot.level} ${snapshot.progress.toFixed(1)}%`;
                   const pointLabel = `${member.name} · ${valueLabel} · ${snapshot.date}`;

@@ -32,6 +32,10 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(app, /ASCII_TRACK/);
   assert.match(app, /ascii-horse/);
   assert.match(app, /ascii-horse-legs/);
+  assert.match(app, /ascii-horse-crown/);
+  assert.match(app, /👑/);
+  assert.match(app, /member\.finishedOn \? " finished" : ""/);
+  assert.match(app, /finished on \$\{member\.finishedOn\}/);
   assert.match(app, /--horse-delay/);
   assert.match(app, /--horse-step-duration/);
   assert.match(app, /ascii-lane/);
@@ -43,6 +47,7 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(app, />\s*honse mode\s*<\/button>/);
   assert.match(app, /\{!honseMode && \(/);
   assert.match(app, /lv\./);
+  assert.match(app, /member\.current\.level < 295/);
   assert.match(app, /className="rank-crown"/);
   assert.match(app, /aria-label="finished"/);
   assert.match(app, /raceProgress\(member\.current\)/);
@@ -54,6 +59,12 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(chart, /project 295/);
   assert.match(chart, /projected winner/);
   assert.match(chart, /dailyExpPace/);
+  assert.match(chart, /CHART_START_DATE = "2026-07-27"/);
+  assert.match(chart, /snapshot\.date >= CHART_START_DATE/);
+  assert.doesNotMatch(chart, /slice\(-7\)/);
+  assert.match(chart, /since july 27/);
+  assert.match(chart, /snapshot\.level > TARGET_LEVEL/);
+  assert.match(chart, /`lv\. \$\{snapshot\.level\}`/);
   assert.doesNotMatch(chart, /exp-delta pace/);
   assert.doesNotMatch(chart, /trendline controls/);
   assert.doesNotMatch(chart, /chart-trend-line/);
@@ -79,6 +90,10 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(styles, /height: 100dvh/);
   assert.match(styles, /\.progress-chart \{\s+flex: 1;\s+min-height: 0;/);
   assert.match(styles, /\.rank-list \{\s+align-self: center;/);
+  assert.match(
+    styles,
+    /\.rank-crown \{[\s\S]*font-size: 14px;[\s\S]*transform: translateY\(-1px\)/,
+  );
   assert.match(styles, /\.honse-mode \.ascii-progress-strip/);
   assert.match(
     styles,
@@ -93,6 +108,22 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.match(styles, /\.ascii-track > span \{[\s\S]*inset-inline: 0/);
   assert.match(styles, /\.ascii-track > span \{[\s\S]*height: 2px/);
   assert.match(styles, /--horse-width: 48px/);
+  assert.match(styles, /\.ascii-track::after/);
+  assert.match(styles, /\.ascii-lane\.finished \.ascii-horse/);
+  assert.match(styles, /--percent-column-width: 42px/);
+  assert.match(styles, /--percent-column-width: 70px/);
+  assert.match(
+    styles,
+    /100% \+ var\(--lane-gap\) \+ var\(--percent-column-width\)/,
+  );
+  assert.match(styles, /var\(--percent-column-width\) -\s+7ch - 2px/);
+  assert.match(styles, /\.ascii-horse-crown/);
+  assert.match(styles, /left: 72%/);
+  assert.match(styles, /transform: translateX\(-50%\)/);
+  assert.match(
+    styles,
+    /\.ascii-lane\.finished \.ascii-leg-frame \{\s+animation: none/,
+  );
   assert.match(
     styles,
     /calc\(var\(--progress\) - var\(--horse-width\)\)/,

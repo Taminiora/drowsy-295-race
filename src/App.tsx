@@ -113,7 +113,6 @@ export function App() {
               {members.map((member, index) => (
                 <div className="rank-row" key={member.name}>
                   <span className="rank-number">
-                    {index + 1}
                     {member.finishedOn ? (
                       <span
                         aria-label="finished"
@@ -123,6 +122,7 @@ export function App() {
                         ♛
                       </span>
                     ) : null}
+                    {index + 1}
                   </span>
                   <div className="character">
                     <a
@@ -159,8 +159,10 @@ export function App() {
                     }
                   >
                     <strong>
-                      lv. {member.current.level} ·{" "}
-                      {member.current.progress.toFixed(1)}%
+                      lv. {member.current.level}
+                      {member.current.level < 295
+                        ? ` · ${member.current.progress.toFixed(1)}%`
+                        : null}
                     </strong>
                     <small>
                       {member.dailyGain !== null
@@ -204,7 +206,7 @@ export function App() {
               );
               return (
                 <div
-                  className="ascii-lane"
+                  className={`ascii-lane${member.finishedOn ? " finished" : ""}`}
                   key={member.name}
                   style={
                     {
@@ -226,7 +228,11 @@ export function App() {
                   <code className="ascii-track">
                     <span aria-hidden="true">{ASCII_TRACK}</span>
                     <b
-                      aria-label={`${member.name} at ${progress.toFixed(1)} percent`}
+                      aria-label={
+                        member.finishedOn
+                          ? `${member.name} finished on ${member.finishedOn}`
+                          : `${member.name} at ${progress.toFixed(1)} percent`
+                      }
                       className="ascii-horse"
                     >
                       {ASCII_HORSE.map((line) => (
@@ -242,6 +248,11 @@ export function App() {
                           </i>
                         ))}
                       </span>
+                      {member.finishedOn ? (
+                        <span aria-hidden="true" className="ascii-horse-crown">
+                          👑
+                        </span>
+                      ) : null}
                     </b>
                   </code>
                   <span>{progress.toFixed(1)}%</span>
