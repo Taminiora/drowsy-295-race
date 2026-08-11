@@ -1,7 +1,7 @@
 {
   "title": "drowsy 295 race",
   "description": "road to level 295.",
-  "updatedOn": "2026-08-10",
+  "updatedOn": "2026-08-11",
   "characters": [
     {
       "name": "karinay",
@@ -194,6 +194,15 @@
           "expCurrent": "366358147436658",
           "expToNext": "430892639851831",
           "progress": 85.023,
+          "world": "Kronos",
+          "job": "Adele"
+        },
+        {
+          "date": "2026-08-11",
+          "level": 294,
+          "expCurrent": "378765560845065",
+          "expToNext": "430892639851831",
+          "progress": 87.902,
           "world": "Kronos",
           "job": "Adele"
         }
@@ -392,6 +401,15 @@
           "progress": 3.377,
           "world": "Kronos",
           "job": "Wind Archer"
+        },
+        {
+          "date": "2026-08-11",
+          "level": 295,
+          "expCurrent": "35158432999449",
+          "expToNext": "870403132500699",
+          "progress": 4.039,
+          "world": "Kronos",
+          "job": "Wind Archer"
         }
       ]
     },
@@ -586,6 +604,15 @@
           "expCurrent": "253472517013928",
           "expToNext": "430892639851831",
           "progress": 58.824,
+          "world": "Kronos",
+          "job": "Arch Mage (F/P)"
+        },
+        {
+          "date": "2026-08-11",
+          "level": 294,
+          "expCurrent": "260453756373822",
+          "expToNext": "430892639851831",
+          "progress": 60.445,
           "world": "Kronos",
           "job": "Arch Mage (F/P)"
         }
@@ -784,6 +811,15 @@
           "progress": 3.482,
           "world": "Kronos",
           "job": "Buccaneer"
+        },
+        {
+          "date": "2026-08-11",
+          "level": 295,
+          "expCurrent": "41017141808406",
+          "expToNext": "870403132500699",
+          "progress": 4.712,
+          "world": "Kronos",
+          "job": "Buccaneer"
         }
       ]
     },
@@ -978,6 +1014,15 @@
           "expCurrent": "359135787063648",
           "expToNext": "430892639851831",
           "progress": 83.346,
+          "world": "Kronos",
+          "job": "Aran"
+        },
+        {
+          "date": "2026-08-11",
+          "level": 294,
+          "expCurrent": "366234510273167",
+          "expToNext": "430892639851831",
+          "progress": 84.994,
           "world": "Kronos",
           "job": "Aran"
         }
@@ -1176,6 +1221,15 @@
           "progress": 2.104,
           "world": "Kronos",
           "job": "Dawn Warrior"
+        },
+        {
+          "date": "2026-08-11",
+          "level": 295,
+          "expCurrent": "22653669288019",
+          "expToNext": "870403132500699",
+          "progress": 2.602,
+          "world": "Kronos",
+          "job": "Dawn Warrior"
         }
       ]
     },
@@ -1370,6 +1424,15 @@
           "expCurrent": "22655071694861",
           "expToNext": "870403132500699",
           "progress": 2.602,
+          "world": "Kronos",
+          "job": "Night Lord"
+        },
+        {
+          "date": "2026-08-11",
+          "level": 295,
+          "expCurrent": "29161818426046",
+          "expToNext": "870403132500699",
+          "progress": 3.35,
           "world": "Kronos",
           "job": "Night Lord"
         }
@@ -1568,6 +1631,15 @@
           "progress": 93.266,
           "world": "Kronos",
           "job": "Kinesis"
+        },
+        {
+          "date": "2026-08-11",
+          "level": 294,
+          "expCurrent": "406826491331390",
+          "expToNext": "430892639851831",
+          "progress": 94.414,
+          "world": "Kronos",
+          "job": "Kinesis"
         }
       ]
     },
@@ -1749,6 +1821,15 @@
         },
         {
           "date": "2026-08-10",
+          "level": 295,
+          "expCurrent": "8975630467886",
+          "expToNext": "870403132500699",
+          "progress": 1.031,
+          "world": "Kronos",
+          "job": "Bishop"
+        },
+        {
+          "date": "2026-08-11",
           "level": 295,
           "expCurrent": "8975630467886",
           "expToNext": "870403132500699",
