@@ -1,7 +1,7 @@
 {
   "title": "drowsy 295 race",
   "description": "road to level 295.",
-  "updatedOn": "2026-08-13",
+  "updatedOn": "2026-08-14",
   "characters": [
     {
       "name": "karinay",
@@ -221,6 +221,15 @@
           "expCurrent": "5040279948490",
           "expToNext": "870403132500699",
           "progress": 0.579,
+          "world": "Kronos",
+          "job": "Adele"
+        },
+        {
+          "date": "2026-08-14",
+          "level": 295,
+          "expCurrent": "9677838589151",
+          "expToNext": "870403132500699",
+          "progress": 1.111,
           "world": "Kronos",
           "job": "Adele"
         }
@@ -446,6 +455,15 @@
           "progress": 4.67,
           "world": "Kronos",
           "job": "Wind Archer"
+        },
+        {
+          "date": "2026-08-14",
+          "level": 295,
+          "expCurrent": "52197133394223",
+          "expToNext": "870403132500699",
+          "progress": 5.996,
+          "world": "Kronos",
+          "job": "Wind Archer"
         }
       ]
     },
@@ -667,6 +685,15 @@
           "expCurrent": "311455918023366",
           "expToNext": "430892639851831",
           "progress": 72.281,
+          "world": "Kronos",
+          "job": "Arch Mage (F/P)"
+        },
+        {
+          "date": "2026-08-14",
+          "level": 294,
+          "expCurrent": "321673271307068",
+          "expToNext": "430892639851831",
+          "progress": 74.652,
           "world": "Kronos",
           "job": "Arch Mage (F/P)"
         }
@@ -892,6 +919,15 @@
           "progress": 5.612,
           "world": "Kronos",
           "job": "Buccaneer"
+        },
+        {
+          "date": "2026-08-14",
+          "level": 295,
+          "expCurrent": "52928361692929",
+          "expToNext": "870403132500699",
+          "progress": 6.08,
+          "world": "Kronos",
+          "job": "Buccaneer"
         }
       ]
     },
@@ -1115,6 +1151,15 @@
           "progress": 91.378,
           "world": "Kronos",
           "job": "Aran"
+        },
+        {
+          "date": "2026-08-14",
+          "level": 295,
+          "expCurrent": "522847843770",
+          "expToNext": "870403132500699",
+          "progress": 0.06,
+          "world": "Kronos",
+          "job": "Aran"
         }
       ]
     },
@@ -1334,6 +1379,15 @@
           "date": "2026-08-13",
           "level": 295,
           "expCurrent": "27389049444374",
+          "expToNext": "870403132500699",
+          "progress": 3.146,
+          "world": "Kronos",
+          "job": "Dawn Warrior"
+        },
+        {
+          "date": "2026-08-14",
+          "level": 295,
+          "expCurrent": "27389179944380",
           "expToNext": "870403132500699",
           "progress": 3.146,
           "world": "Kronos",
@@ -1561,6 +1615,15 @@
           "progress": 4.614,
           "world": "Kronos",
           "job": "Night Lord"
+        },
+        {
+          "date": "2026-08-14",
+          "level": 295,
+          "expCurrent": "49358843708283",
+          "expToNext": "870403132500699",
+          "progress": 5.67,
+          "world": "Kronos",
+          "job": "Night Lord"
         }
       ]
     },
@@ -1784,6 +1847,15 @@
           "progress": 1.071,
           "world": "Kronos",
           "job": "Kinesis"
+        },
+        {
+          "date": "2026-08-14",
+          "level": 295,
+          "expCurrent": "19586536070484",
+          "expToNext": "870403132500699",
+          "progress": 2.25,
+          "world": "Kronos",
+          "job": "Kinesis"
         }
       ]
     },
@@ -1996,6 +2068,15 @@
           "expCurrent": "23398236173675",
           "expToNext": "870403132500699",
           "progress": 2.688,
+          "world": "Kronos",
+          "job": "Bishop"
+        },
+        {
+          "date": "2026-08-14",
+          "level": 295,
+          "expCurrent": "28651856067617",
+          "expToNext": "870403132500699",
+          "progress": 3.291,
           "world": "Kronos",
           "job": "Bishop"
         }
