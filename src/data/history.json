@@ -1,7 +1,7 @@
 {
   "title": "drowsy 295 race",
   "description": "road to level 295.",
-  "updatedOn": "2026-08-15",
+  "updatedOn": "2026-08-16",
   "characters": [
     {
       "name": "karinay",
@@ -239,6 +239,15 @@
           "expCurrent": "14351739216838",
           "expToNext": "870403132500699",
           "progress": 1.648,
+          "world": "Kronos",
+          "job": "Adele"
+        },
+        {
+          "date": "2026-08-16",
+          "level": 295,
+          "expCurrent": "22114001756777",
+          "expToNext": "870403132500699",
+          "progress": 2.54,
           "world": "Kronos",
           "job": "Adele"
         }
@@ -482,6 +491,15 @@
           "progress": 6.691,
           "world": "Kronos",
           "job": "Wind Archer"
+        },
+        {
+          "date": "2026-08-16",
+          "level": 295,
+          "expCurrent": "67802821067722",
+          "expToNext": "870403132500699",
+          "progress": 7.789,
+          "world": "Kronos",
+          "job": "Wind Archer"
         }
       ]
     },
@@ -721,6 +739,15 @@
           "expCurrent": "330534941199661",
           "expToNext": "430892639851831",
           "progress": 76.709,
+          "world": "Kronos",
+          "job": "Arch Mage (F/P)"
+        },
+        {
+          "date": "2026-08-16",
+          "level": 294,
+          "expCurrent": "342566044923423",
+          "expToNext": "430892639851831",
+          "progress": 79.501,
           "world": "Kronos",
           "job": "Arch Mage (F/P)"
         }
@@ -964,6 +991,15 @@
           "progress": 7.127,
           "world": "Kronos",
           "job": "Buccaneer"
+        },
+        {
+          "date": "2026-08-16",
+          "level": 295,
+          "expCurrent": "67821425927724",
+          "expToNext": "870403132500699",
+          "progress": 7.791,
+          "world": "Kronos",
+          "job": "Buccaneer"
         }
       ]
     },
@@ -1203,6 +1239,15 @@
           "expCurrent": "8674902387142",
           "expToNext": "870403132500699",
           "progress": 0.996,
+          "world": "Kronos",
+          "job": "Aran"
+        },
+        {
+          "date": "2026-08-16",
+          "level": 295,
+          "expCurrent": "24333181495815",
+          "expToNext": "870403132500699",
+          "progress": 2.795,
           "world": "Kronos",
           "job": "Aran"
         }
@@ -1446,6 +1491,15 @@
           "progress": 3.571,
           "world": "Kronos",
           "job": "Dawn Warrior"
+        },
+        {
+          "date": "2026-08-16",
+          "level": 295,
+          "expCurrent": "33396008226119",
+          "expToNext": "870403132500699",
+          "progress": 3.836,
+          "world": "Kronos",
+          "job": "Dawn Warrior"
         }
       ]
     },
@@ -1685,6 +1739,15 @@
           "expCurrent": "56514837073158",
           "expToNext": "870403132500699",
           "progress": 6.492,
+          "world": "Kronos",
+          "job": "Night Lord"
+        },
+        {
+          "date": "2026-08-16",
+          "level": 295,
+          "expCurrent": "66073428158098",
+          "expToNext": "870403132500699",
+          "progress": 7.591,
           "world": "Kronos",
           "job": "Night Lord"
         }
@@ -1928,6 +1991,15 @@
           "progress": 3.078,
           "world": "Kronos",
           "job": "Kinesis"
+        },
+        {
+          "date": "2026-08-16",
+          "level": 295,
+          "expCurrent": "33515263568139",
+          "expToNext": "870403132500699",
+          "progress": 3.85,
+          "world": "Kronos",
+          "job": "Kinesis"
         }
       ]
     },
@@ -2154,6 +2226,15 @@
         },
         {
           "date": "2026-08-15",
+          "level": 295,
+          "expCurrent": "28651856067617",
+          "expToNext": "870403132500699",
+          "progress": 3.291,
+          "world": "Kronos",
+          "job": "Bishop"
+        },
+        {
+          "date": "2026-08-16",
           "level": 295,
           "expCurrent": "28651856067617",
           "expToNext": "870403132500699",
