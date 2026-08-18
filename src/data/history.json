@@ -1,7 +1,7 @@
 {
   "title": "drowsy 295 race",
   "description": "road to level 295.",
-  "updatedOn": "2026-08-17",
+  "updatedOn": "2026-08-18",
   "characters": [
     {
       "name": "karinay",
@@ -253,6 +253,15 @@
         },
         {
           "date": "2026-08-17",
+          "level": 295,
+          "expCurrent": "28652302804699",
+          "expToNext": "870403132500699",
+          "progress": 3.291,
+          "world": "Kronos",
+          "job": "Adele"
+        },
+        {
+          "date": "2026-08-18",
           "level": 295,
           "expCurrent": "28652302804699",
           "expToNext": "870403132500699",
@@ -518,6 +527,15 @@
           "progress": 8.886,
           "world": "Kronos",
           "job": "Wind Archer"
+        },
+        {
+          "date": "2026-08-18",
+          "level": 295,
+          "expCurrent": "83575403318378",
+          "expToNext": "870403132500699",
+          "progress": 9.601,
+          "world": "Kronos",
+          "job": "Wind Archer"
         }
       ]
     },
@@ -775,6 +793,15 @@
           "expCurrent": "349550476829790",
           "expToNext": "430892639851831",
           "progress": 81.122,
+          "world": "Kronos",
+          "job": "Arch Mage (F/P)"
+        },
+        {
+          "date": "2026-08-18",
+          "level": 294,
+          "expCurrent": "365873700172273",
+          "expToNext": "430892639851831",
+          "progress": 84.91,
           "world": "Kronos",
           "job": "Arch Mage (F/P)"
         }
@@ -1036,6 +1063,15 @@
           "progress": 8.818,
           "world": "Kronos",
           "job": "Buccaneer"
+        },
+        {
+          "date": "2026-08-18",
+          "level": 295,
+          "expCurrent": "83133303490945",
+          "expToNext": "870403132500699",
+          "progress": 9.551,
+          "world": "Kronos",
+          "job": "Buccaneer"
         }
       ]
     },
@@ -1293,6 +1329,15 @@
           "expCurrent": "35584905148256",
           "expToNext": "870403132500699",
           "progress": 4.088,
+          "world": "Kronos",
+          "job": "Aran"
+        },
+        {
+          "date": "2026-08-18",
+          "level": 295,
+          "expCurrent": "37349728598198",
+          "expToNext": "870403132500699",
+          "progress": 4.291,
           "world": "Kronos",
           "job": "Aran"
         }
@@ -1554,6 +1599,15 @@
           "progress": 3.836,
           "world": "Kronos",
           "job": "Dawn Warrior"
+        },
+        {
+          "date": "2026-08-18",
+          "level": 295,
+          "expCurrent": "33659186506704",
+          "expToNext": "870403132500699",
+          "progress": 3.867,
+          "world": "Kronos",
+          "job": "Dawn Warrior"
         }
       ]
     },
@@ -1811,6 +1865,15 @@
           "expCurrent": "83832754141071",
           "expToNext": "870403132500699",
           "progress": 9.631,
+          "world": "Kronos",
+          "job": "Night Lord"
+        },
+        {
+          "date": "2026-08-18",
+          "level": 295,
+          "expCurrent": "90864382927537",
+          "expToNext": "870403132500699",
+          "progress": 10.439,
           "world": "Kronos",
           "job": "Night Lord"
         }
@@ -2072,6 +2135,15 @@
           "progress": 4.604,
           "world": "Kronos",
           "job": "Kinesis"
+        },
+        {
+          "date": "2026-08-18",
+          "level": 295,
+          "expCurrent": "49217662991307",
+          "expToNext": "870403132500699",
+          "progress": 5.654,
+          "world": "Kronos",
+          "job": "Kinesis"
         }
       ]
     },
@@ -2320,6 +2392,15 @@
           "expCurrent": "33879385951024",
           "expToNext": "870403132500699",
           "progress": 3.892,
+          "world": "Kronos",
+          "job": "Bishop"
+        },
+        {
+          "date": "2026-08-18",
+          "level": 295,
+          "expCurrent": "35541945176147",
+          "expToNext": "870403132500699",
+          "progress": 4.083,
           "world": "Kronos",
           "job": "Bishop"
         }
