@@ -20,6 +20,7 @@ const FINISH_OVERRIDES: Record<string, FinishOverride> = {
     date: "2026-08-05",
     place: 3,
   },
+  nelo: { date: "2026-08-20", place: 9 },
 };
 
 export type RaceFrameEntry = {
@@ -142,24 +143,24 @@ function finishLabel(character: CharacterHistory) {
 function compareFinishers(left: CharacterHistory, right: CharacterHistory) {
   const leftOverride = FINISH_OVERRIDES[left.name];
   const rightOverride = FINISH_OVERRIDES[right.name];
-  if (leftOverride || rightOverride) {
+  const leftDate = finishDate(left);
+  const rightDate = finishDate(right);
+  const leftFinish = firstDetectedFinish(left);
+  const rightFinish = firstDetectedFinish(right);
+  if (leftDate && rightDate) {
+    const dateOrder = leftDate.localeCompare(rightDate);
+    if (dateOrder) return dateOrder;
     if (leftOverride && rightOverride) {
       return leftOverride.place - rightOverride.place;
     }
-    return leftOverride ? -1 : 1;
   }
-
-  const leftFinish = firstDetectedFinish(left);
-  const rightFinish = firstDetectedFinish(right);
   if (leftFinish && rightFinish) {
-    const dateOrder = leftFinish.date.localeCompare(rightFinish.date);
-    if (dateOrder) return dateOrder;
     const leftExp = BigInt(leftFinish.expCurrent);
     const rightExp = BigInt(rightFinish.expCurrent);
     return leftExp === rightExp ? 0 : leftExp > rightExp ? -1 : 1;
   }
-  if (leftFinish) return -1;
-  if (rightFinish) return 1;
+  if (leftDate) return -1;
+  if (rightDate) return 1;
   return 0;
 }
 

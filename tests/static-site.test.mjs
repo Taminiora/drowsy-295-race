@@ -223,8 +223,8 @@ test("the built site is a static Drowsy leaderboard", async () => {
   const nelo = parsed.characters.find(
     (character) => character.name === "nelo",
   );
-  assert.equal(snapshotOn(nelo, "2026-08-19").level, 295);
-  assert.equal(snapshotOn(nelo, "2026-08-19").progress, 0);
+  assert.equal(snapshotOn(nelo, "2026-08-19").level, 294);
+  assert.equal(snapshotOn(nelo, "2026-08-19").progress, 87.779);
 
   const voln = parsed.characters.find(
     (character) => character.name === "Voln",
@@ -288,6 +288,7 @@ test("the wrapup is a real static page with the full race replay", async () => {
   assert.match(summary, /xZenjiro: \{ date: "2026-08-05", place: 1 \}/);
   assert.match(summary, /edison: \{ date: "2026-08-05", place: 2/);
   assert.match(summary, /date: "2026-08-05",\s+place: 3/);
+  assert.match(summary, /nelo: \{ date: "2026-08-20", place: 9 \}/);
   assert.doesNotMatch(summary, /timeLabel|5:00 pm|8:39 pm/);
   for (const stat of [
     "winner",
