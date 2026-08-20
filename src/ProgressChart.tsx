@@ -284,6 +284,9 @@ export function ProgressChart({
         >
           project 295
         </button>
+        <a className="projection-toggle wrapup-link" href="./wrapup/">
+          wrapup
+        </a>
         {showProjection && projectedWinner && winnerDate ? (
           <span className="projection-result">
             projected winner{" "}

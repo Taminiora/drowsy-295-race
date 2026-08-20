@@ -7,6 +7,7 @@ import {
   firstFinishSnapshot,
   horseStepDuration,
   horseStepSpeed,
+  raceReplayGaitDuration,
   raceProgress,
 } from "../src/rankings.ts";
 
@@ -57,6 +58,11 @@ test("the built site is a static Drowsy leaderboard", async () => {
   ]);
   assert.match(chart, /aria-pressed/);
   assert.match(chart, /project 295/);
+  assert.match(
+    chart,
+    /className="projection-toggle wrapup-link" href="\.\/wrapup\/"/,
+  );
+  assert.match(chart, />\s*wrapup\s*<\/a>/);
   assert.match(chart, /projected winner/);
   assert.match(chart, /dailyExpPace/);
   assert.match(chart, /CHART_START_DATE = "2026-07-27"/);
@@ -214,6 +220,12 @@ test("the built site is a static Drowsy leaderboard", async () => {
   assert.equal(snapshotOn(yugameru, "2026-07-23").progress, 10.597);
   assert.equal(snapshotOn(yugameru, "2026-07-24").progress, 10.597);
 
+  const nelo = parsed.characters.find(
+    (character) => character.name === "nelo",
+  );
+  assert.equal(snapshotOn(nelo, "2026-08-19").level, 295);
+  assert.equal(snapshotOn(nelo, "2026-08-19").progress, 0);
+
   const voln = parsed.characters.find(
     (character) => character.name === "Voln",
   );
@@ -234,6 +246,94 @@ test("the built site is a static Drowsy leaderboard", async () => {
     snapshotOn(voln, "2026-07-28").expCurrent,
     "227261512908920",
   );
+});
+
+test("the wrapup is a real static page with the full race replay", async () => {
+  const [html, app, replay, chart, summary, styles, vite] = await Promise.all([
+    read("dist/wrapup/index.html"),
+    read("src/WrapupApp.tsx"),
+    read("src/RaceReplay.tsx"),
+    read("src/WrapupChart.tsx"),
+    read("src/race-summary.ts"),
+    read("src/wrapup.css"),
+    read("vite.config.ts"),
+  ]);
+
+  assert.match(html, /<div id="root"><\/div>/);
+  assert.match(html, /<title>honse wrapup<\/title>/);
+  assert.match(html, /\.\.\/assets\/wrapup-/);
+  assert.match(vite, /wrapup\/index\.html/);
+  assert.match(app, /<RaceReplay summary=\{summary\}/);
+  assert.match(app, />final leaderboard<\/h2>/);
+  assert.match(app, />race stats<\/h2>/);
+  assert.doesNotMatch(app, /honse facts|horseFacts|horse-fact/);
+  assert.match(app, /className="wrapup-summary-grid"/);
+  assert.match(app, /final stats lock when everyone reaches 295/);
+  assert.match(replay, />\s*start\s*<\/button>/);
+  assert.match(replay, />\s*stop\s*<\/button>/);
+  assert.match(replay, />\s*reset\s*<\/button>/);
+  assert.doesNotMatch(replay, />\s*replay\s*<\/button>/);
+  assert.match(replay, /setRunning\(false\);\s+setResetting\(true\);\s+setFrameIndex\(0\)/);
+  assert.match(styles, /\.replay-race\.resetting \.replay-horse \{\s+transition: none/);
+  assert.doesNotMatch(replay, /playback rate|0\.5x|2x/);
+  assert.match(replay, /entry\.progress/);
+  assert.match(replay, /day \{frameIndex \+ 1\}/);
+  assert.match(replay, /entry\.finished/);
+  assert.match(replay, /`#\$\{finishPlaces\.get\(entry\.name\)\}`/);
+  assert.match(replay, /raceReplayGaitDuration/);
+  assert.match(replay, /entry\.gainPercent > 0 \? " moving" : ""/);
+  assert.match(chart, /summary\.frames/);
+  assert.match(chart, /full race progress graph/);
+  assert.match(summary, /RACE_START_DATE = "2026-07-27"/);
+  assert.match(summary, /xZenjiro: \{ date: "2026-08-05", place: 1 \}/);
+  assert.match(summary, /edison: \{ date: "2026-08-05", place: 2/);
+  assert.match(summary, /date: "2026-08-05",\s+place: 3/);
+  assert.doesNotMatch(summary, /timeLabel|5:00 pm|8:39 pm/);
+  for (const stat of [
+    "winner",
+    "largest daily spike",
+    "biggest final push",
+    "busiest race day",
+    "biggest rank climb",
+    "most consistent",
+    "highest race xp/day",
+  ]) {
+    assert.match(summary, new RegExp(`label: "${stat}"`));
+  }
+  assert.doesNotMatch(summary, /quietest race day/);
+  assert.match(summary, /filter\(\(entry\) => entry\.gainXp > 0n\)/);
+  assert.doesNotMatch(summary, /HorseFact|buildHorseFacts|horseFacts/);
+  assert.match(
+    styles,
+    /\.replay-horse \{[\s\S]*transition: left var\(--horse-travel-duration, 1500ms\) linear/,
+  );
+  assert.match(replay, /--horse-travel-duration/);
+  assert.match(replay, /FRAME_TIME_MS = 1_500/);
+  assert.match(
+    replay,
+    /ASCII_HORSE_LEGS = \[[^\]]+,[^\]]+,[^\]]+,[^\]]+\]/,
+  );
+  assert.match(styles, /@keyframes wrap-horse-step-d/);
+  assert.match(
+    styles,
+    /\.replay-crown \{[\s\S]*animation: reveal-replay-crown 1ms linear var\(--horse-travel-duration, 1500ms\)/,
+  );
+  assert.match(styles, /@keyframes reveal-replay-crown/);
+  assert.match(
+    styles,
+    /\.replay-gain\.finish-order \{[\s\S]*animation: reveal-replay-crown/,
+  );
+  assert.match(
+    styles,
+    /\.replay-gain\.finish-order \{[\s\S]*padding-left: 56px/,
+  );
+  assert.match(styles, /\.wrap-stats \{[\s\S]*grid-template-columns: repeat\(4/);
+  assert.match(
+    styles,
+    /\.wrapup-summary-grid \{[\s\S]*grid-template-columns: minmax\(360px, 0\.5fr\) minmax\(0, 1\.5fr\)/,
+  );
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.doesNotMatch(styles, /horse-fact/);
 });
 
 test("finished characters keep their race placement", () => {
@@ -320,6 +420,13 @@ test("horse leg speed scales with the latest daily gain", () => {
   assert.equal(highSpeed, 660);
   assert.equal(horseStepDuration(lowSpeed), 660);
   assert.equal(horseStepDuration(highSpeed), 340);
+});
+
+test("replay gait cadence follows actual distance and travel time", () => {
+  assert.equal(raceReplayGaitDuration(6, 1_800), 810);
+  assert.equal(raceReplayGaitDuration(12, 1_800), 405);
+  assert.equal(raceReplayGaitDuration(6, 900), 405);
+  assert.equal(raceReplayGaitDuration(0, 1_800), 1_800);
 });
 
 test("the project has no server or database runtime", async () => {

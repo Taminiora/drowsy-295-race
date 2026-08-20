@@ -85,3 +85,20 @@ export function horseStepSpeed(
 export function horseStepDuration(speed: number) {
   return HORSE_STEP_TIME_BUDGET_MS - speed;
 }
+
+export function raceReplayGaitDuration(
+  gainPercent: number,
+  travelDurationMs: number,
+) {
+  if (gainPercent <= 0) return travelDurationMs;
+
+  const gaitStridePercent = 2.7;
+  const durationForDistance =
+    (travelDurationMs * gaitStridePercent) / gainPercent;
+  return Math.round(
+    Math.min(
+      travelDurationMs * 0.7,
+      Math.max(travelDurationMs * 0.18, durationForDistance),
+    ),
+  );
+}
