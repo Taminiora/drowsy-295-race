@@ -38,6 +38,13 @@ jobs:
           fi
 
           today="$(TZ=America/Los_Angeles date +%F)"
+          final_snapshot_date="2026-08-20"
+          if [[ "$today" > "$final_snapshot_date" ]]; then
+            echo "Race tracking ended after $final_snapshot_date; leaving the site static."
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
           updated_on="$(jq -r '.updatedOn' src/data/history.json)"
           if [[ "$updated_on" == "$today" ]]; then
             echo "Rankings are already current for $today."

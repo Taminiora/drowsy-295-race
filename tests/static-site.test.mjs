@@ -464,6 +464,9 @@ test("the updater is slow and the Pages workflow is configured", async () => {
   assert.match(workflow, /cron: "10 18 \* \* \*"/);
   assert.match(workflow, /cron: "10 19 \* \* \*"/);
   assert.match(workflow, /TZ=America\/Los_Angeles date \+%F/);
+  assert.match(workflow, /final_snapshot_date="2026-08-20"/);
+  assert.match(workflow, /today" > "\$final_snapshot_date/);
+  assert.match(workflow, /leaving the site static/);
   assert.match(workflow, /jq -r '\.updatedOn' src\/data\/history\.json/);
   assert.doesNotMatch(workflow, /date \+%H/);
   assert.match(workflow, /actions\/deploy-pages@v4/);
